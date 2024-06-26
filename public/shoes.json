@@ -1,0 +1,99 @@
+[
+    {
+      "name": "AirMax Runner",
+      "price": 120,
+      "description": "Lightweight running shoes with superior cushioning.",
+      "brand": "Nike",
+      "image": "https://i.ibb.co/Qv7JwXh/nike-air-max-coliseum-racer-1.webp",
+      "date": "2024-06-19T18:19:21.911+00:00"
+    },
+    {
+      "name": "Classic Leather",
+      "price": 90,
+      "description": "Timeless leather sneakers that never go out of style.",
+      "brand": "Reebok",
+      "image": "https://i.ibb.co/238GfP4/cover.jpg",
+      "date": "2024-06-20T18:19:21.911+00:00"
+    },
+    {
+      "name": "Ultraboost 21",
+      "price": 180,
+      "description": "High-performance running shoes with responsive cushioning.",
+      "brand": "Adidas",
+      "image": "https://i.ibb.co/ygNyDnW/images.jpg",
+      "date": "2024-06-22T18:19:21.911+00:00"
+    },
+    {
+      "name": "Gel-Kayano 27",
+      "price": 160,
+      "description": "Stability running shoes designed for long-distance comfort.",
+      "brand": "Asics",
+      "image": "https://i.ibb.co/FDzbpDg/20200314-Asics-Santa-Barbara-01401-g.jpg",
+      "date": "2024-06-21T18:19:21.911+00:00"
+    },
+    {
+      "name": "Joyride Run Flyknit",
+      "price": 190,
+      "description": "Innovative shoes with bead-filled pods for personalized cushioning.",
+      "brand": "Nike",
+      "image": "https://i.ibb.co/Y8HD7wC/images-1.jpg",
+      "date": "2024-06-22T18:19:21.911+00:00"
+    },
+    {
+      "name": "Fresh Foam 1080v11",
+      "price": 150,
+      "description": "Premium running shoes with plush cushioning and a sleek design.",
+      "brand": "New Balance",
+      "image": "https://i.ibb.co/jhjwH7P/Y6-MYWwzmk-XYm-MQJs-DT8f8a.jpg",
+      "date": "2024-06-20T18:19:21.911+00:00"
+    },
+    {
+      "name": "Classic Slip-On",
+      "price": 50,
+      "description": "Easy-to-wear slip-on shoes with fun patterns and durable soles.",
+      "brand": "Vans",
+      "image": "https://i.ibb.co/Y0fWB0r/images-2.jpg",
+      "date": "2024-06-19T18:19:21.911+00:00"
+    },
+    {
+      "name": "Superstar J",
+      "price": 70,
+      "description": "Iconic sneakers with a comfortable fit and stylish look.",
+      "brand": "Adidas",
+      "image": "https://i.ibb.co/6P5J2mp/images-3.jpg",
+      "date": "2024-06-21T18:19:21.911+00:00"
+    },
+    {
+      "name": "Flex Runner",
+      "price": 60,
+      "description": "Flexible running shoes with easy on-and-off design.",
+      "brand": "Nike",
+      "image": "https://i.ibb.co/JkH64rv/39833-pair.jpg",
+      "date": "2024-06-22T18:19:21.911+00:00"
+    },
+    {
+      "name": "Continental 80",
+      "price": 100,
+      "description": "Retro-inspired sneakers with a modern twist.",
+      "brand": "Adidas",
+      "image": "https://i.ibb.co/W27MCgN/images-4.jpg",
+      "date": "2024-06-19T18:19:21.911+00:00"
+    },
+    {
+      "name": "Classic Cortez",
+      "price": 85,
+      "description": "Vintage running shoes with a timeless silhouette.",
+      "brand": "Nike",
+      "image": "https://i.ibb.co/W3JpK5Z/nike-cortez-forrest-gump-FZ1347-100-release-dat",  
+      "date": "2024-06-20T18:19:21.911+00:00"
+    },
+    {
+      "name": "Chuck Taylor All Star",
+      "price": 55,
+      "description": "Classic high-top sneakers with durable canvas and rubber sole.",
+      "brand": "Converse",
+      "image": "https://i.ibb.co/DL6kf1p/0883-CON3-J231-C00-B013-1.jpg",
+      "date": "2024-06-22T18:19:21.911+00:00"
+    }
+  ]
+  
