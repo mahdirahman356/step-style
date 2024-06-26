@@ -31,13 +31,13 @@ const Login = () => {
             })
             .cetch(error => {
                 console.log(error.message)
+                setLoading(false);
                 Swal.fire({
                     title: 'Error',
                     text: 'User is not available',
                     icon: 'error',
                     confirmButtonText: 'close'
                 })
-                setLoading(false);
             })
 
     }
