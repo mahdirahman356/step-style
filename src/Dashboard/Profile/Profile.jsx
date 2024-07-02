@@ -6,6 +6,7 @@ import UpdateProfile from "../UpdateProfile/UpdateProfile";
 import profile from "../../assets/image/user.avif"
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import "../../style.css"
 const Profile = () => {
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
@@ -18,9 +19,9 @@ const Profile = () => {
         }
     })
     return (
-        <div className="w-[95%] md:w-[60%] mx-auto flex justify-center items-center my-12 md:my-28">
+        <div className="w-[95%] md:w-[60%] mx-auto flex justify-center items-center my-12 md:my-28 nunito">
            {
-            TheUser.map((user, index) =>  <div key={index} className="w-full px-8 py-4 mt-12 bg-[#1A2130] text-white rounded-lg shadow-lg  md:mt-24">
+            TheUser.map((user, index) =>  <div key={index} className="w-full px-8 py-4 mt-12 bg-gray-600 text-white glass rounded-lg shadow-lg  md:mt-24">
             <div className="flex justify-center -mt-16 ">
                 <img className="object-cover w-24 h-24 border-2 rounded-full" alt="Testimonial avatar" src={user.image ? user.image : profile} />
             </div>
@@ -34,7 +35,7 @@ const Profile = () => {
             </div>
             <div className="flex justify-end">
                 {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                <button className="btn rounded-sm bg-[#1A2130] text-white" onClick={() => document.getElementById('my_modal_3').showModal()}><LiaEditSolid className="text-xl" /> Edit your profile</button>
+                <button className="btn rounded-sm " onClick={() => document.getElementById('my_modal_3').showModal()}><LiaEditSolid className="text-xl" /> Edit your profile</button>
                 <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
                         <form method="dialog">

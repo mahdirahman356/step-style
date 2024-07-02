@@ -1,18 +1,20 @@
 import { IoCallOutline, IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import { LuUser2 } from "react-icons/lu";
 import { VscActivateBreakpoints } from "react-icons/vsc";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
+import "../../style.css"
 
 const ShoesDetails = () => {
     const shoes = useLoaderData()
     const { user } = useContext(AuthContext)
     const [TheUser, SetTheUser] = useState([])
     const axiosSecure = useAxiosSecure()
-    const { name, price, image, brand, description, size, color, category } = shoes[0]
+    const navigate = useNavigate()
+    const {_id, name, price, image, brand, description, size, color, category } = shoes[0]
     useEffect(() => {
         axiosSecure.get(`/users/email/${user.email}`)
             .then(res => {
@@ -21,7 +23,7 @@ const ShoesDetails = () => {
             })
     }, [])
 
-    const handleOrder = async(e) => {
+       const handleOrder = async(e) => {
         e.preventDefault();
         let form = e.target;
         let userName = form.userName.value;
@@ -35,11 +37,14 @@ const ShoesDetails = () => {
             email: email,
             location: location,
             contactNumber: contactNumber,
+            productId: _id,
             productName: name,
             productPrice: price,
             productBrand: brand,
             shoeSize: shoeSize,
             shoeColor: shoeColor,
+            date: new Date(),
+            confirmation: "Pending"
         }
         console.log(order)
         try {
@@ -52,6 +57,7 @@ const ShoesDetails = () => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             })
+            navigate("/dashboard/order")
           }
 
         } catch (error) {
@@ -63,7 +69,7 @@ const ShoesDetails = () => {
     return (
         <div className="w-[95%] md:w-[85%] mx-auto flex flex-col md:flex-row justify-between gap-16 items-center md:my-20">
 
-            <div className="max-w-2xl md:w-1/2 overflow-hidden bg-white md:rounded-lg shadow-md ">
+            <div className="max-w-2xl md:w-1/2 overflow-hidden bg-white md:rounded-lg shadow-md nunito">
                 <img className="object-cover w-full h-64" src={image} alt="Article" />
 
                 <div className="p-6">
@@ -85,9 +91,9 @@ const ShoesDetails = () => {
             </div>
 
 
-            <div className="flex-1">
-                <h1 className="text-3xl font-bold text-center">Order</h1>
-                <form onSubmit={handleOrder} className=" space-y-4 mt-12 mb-4 w-full">
+            <div className="flex-1 my-5">
+                <h1 className="text-3xl font-bold text-center nunito text-gray-500">Order</h1>
+                <form onSubmit={handleOrder} className=" space-y-4 mt-12 mb-4 w-full nunito">
                     {/* Name */}
                     <label className="input rounded-3xl input-bordered flex items-center gap-2 w-full">
                         <LuUser2 className="text-gray-500 text-xl" />
@@ -133,7 +139,7 @@ const ShoesDetails = () => {
                             placeholder="Contact Number"
                             required />
                     </label>
-                   <div className="flex gap-2"> 
+                   <div className="flex flex-col lg:flex-row gap-2"> 
                      {/* your shoe size */}
                      <select name="shoeSize" className="select select-bordered w-full rounded-3xl" required>
                             <option value="" disabled selected>Select your shoe size</option>

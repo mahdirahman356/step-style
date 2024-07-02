@@ -1,7 +1,7 @@
 import { CgShoppingCart } from "react-icons/cg";
 import { HiOutlineHome } from "react-icons/hi";
 import { LuUser2 } from "react-icons/lu";
-import { RiMenuUnfold3Line } from "react-icons/ri";
+import { TbListDetails } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -20,11 +20,11 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu bg-base-200 text-base-content min-h-full w-72 p-12">
                             {/* Sidebar content here */}
-                            <NavLink className="flex items-center gap-2 mb-2" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>
-                            <NavLink className="flex items-center gap-2 mb-2" to="order"> <RiMenuUnfold3Line className="text-xl" /> Order</NavLink>
+                            <NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>
+                            <NavLink className="flex items-center gap-2 mb-3" to="order"> <TbListDetails className="text-xl" />My Orders</NavLink>
 
 
-                            <NavLink className="flex items-center gap-2 border-t-2 pt-3 mt-7 mb-2" to="/"><HiOutlineHome className="text-xl" />Home</NavLink>
+                            <NavLink className="flex items-center gap-2 border-t-2 pt-3 mt-7 mb-3" to="/"><HiOutlineHome className="text-xl" />Home</NavLink>
                             <NavLink className="flex items-center gap-2" to="/shop"> <CgShoppingCart className="text-xl" />Shop</NavLink>
                         </ul>
                     </div>

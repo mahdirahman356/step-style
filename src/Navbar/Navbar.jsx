@@ -4,7 +4,7 @@ import profile from "../assets/image/user.avif"
 import { useContext } from "react";
 import { AuthContext } from "../Context/Context";
 import { VscSignOut } from "react-icons/vsc";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { PiShoppingCartLight } from "react-icons/pi";
 const Navbar = () => {
   const { user, userLogOut } = useContext(AuthContext)
 
@@ -38,19 +38,19 @@ const Navbar = () => {
               <li><a>Item 3</a></li>
             </ul>
           </div>
-          <a className="btn btn-ghost mb-4">
+          <a className="mb-2">
             <img className="w-24 h-16 " src={image} alt="" />
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
         </div>
         <div className="navbar-end">
-          <ul className="menu menu-horizontal px-1 gap-6 hidden lg:flex mr-7">
+          <ul className="menu menu-horizontal px-1 gap-6 hidden lg:flex items-center mr-7">
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/shop'>Shop</NavLink>
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
-            <NavLink><MdOutlineShoppingCart className="text-2xl text-gray-500" /></NavLink>
+            <NavLink>{user && <PiShoppingCartLight className="text-2xl text-gray-500" />}</NavLink>
 
           </ul>
           {
@@ -58,7 +58,7 @@ const Navbar = () => {
             <>
               <details className="dropdown dropdown-end">
                 <summary className="btn btn-ghost p-0 rounded-full m-1">
-                  <img className="object-cover w-12 h-12 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src={user.photoURL ? user.photoURL : profile} />
+                  <img className="object-cover w-12 h-12 border-2  rounded-full avatar" src={user.photoURL ? user.photoURL : profile} />
                 </summary>
                 <ul className="p-2 shadow menu dropdown-content z-10 bg-base-100 rounded-box w-52">
                   <li><a>{user.displayName}</a></li>
