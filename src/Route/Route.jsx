@@ -9,6 +9,8 @@ import Shop from "../component/Shop/Shop";
 import ShoesDetails from "../component/ShoesDetails/ShoesDetails";
 import Dashboard from "../Dashboard/Dashboard/Dashboard";
 import Orders from "../Dashboard/Orders/Orders";
+import AllOrders from "../Dashboard/AllOrders/AllOrders";
+import OrderDetails from "../Dashboard/OrderDetails/OrderDetails";
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +52,15 @@ export const router = createBrowserRouter([
                 path: "order",
                 element:<PrivetRoute><Orders></Orders></PrivetRoute>
             },
+            {
+                path: "all-orders",
+                element: <PrivetRoute><AllOrders></AllOrders></PrivetRoute>
+            },
+            {
+                path: "/dashboard/all-orders/order-details/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/order/${params.id}`),
+                element: <PrivetRoute><OrderDetails></OrderDetails></PrivetRoute>
+            }
         ]
     }
 ]);

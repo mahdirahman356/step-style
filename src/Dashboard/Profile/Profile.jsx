@@ -21,7 +21,7 @@ const Profile = () => {
     return (
         <div className="w-[95%] md:w-[60%] mx-auto flex justify-center items-center my-12 md:my-28 nunito">
            {
-            TheUser.map((user, index) =>  <div key={index} className="w-full px-8 py-4 mt-12 bg-gray-600 text-white glass rounded-lg shadow-lg  md:mt-24">
+            TheUser.map((user, index) =>  <div key={index} className="w-full px-8 py-4 mt-12 bg-gray-500 text-white glass rounded-lg shadow-lg  md:mt-24">
             <div className="flex justify-center -mt-16 ">
                 <img className="object-cover w-24 h-24 border-2 rounded-full" alt="Testimonial avatar" src={user.image ? user.image : profile} />
             </div>

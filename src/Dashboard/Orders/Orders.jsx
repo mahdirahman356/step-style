@@ -4,10 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/Context";
 import { Link } from "react-router-dom";
 import { RiDeleteBinLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 const Orders = () => {
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
-    const { data: order = [] } = useQuery({
+    const { data: order = [], refetch } = useQuery({
         queryKey: ["order"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/order/email/${user.email}`)
@@ -16,6 +17,36 @@ const Orders = () => {
             return recentOrders
         }
     })
+    
+    const handleDeleteOrder = (id, productName) => {
+          console.log(id)
+
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+            axiosSecure.delete(`/order-delete/${id}`)
+            .then(res => {
+               console.log(res.data)
+               if(res.data.deletedCount > 0){
+                Swal.fire({
+                    title: "Deleted!",
+                    text: `${productName} has been deleted.`,
+                    icon: "success"
+                  });
+               }
+               refetch()
+            })
+            }
+          });
+    }
+
     return (
         <div className="w-[95%] mx-auto">
             <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">My Orders</h2>
@@ -47,7 +78,7 @@ const Orders = () => {
                             </td>
                             <td><span className="text-blue-500 btn btn-sm">Pay</span></td>
                             <td>{order.confirmation}</td>
-                            <td><span className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
+                            <td><span onClick={() => handleDeleteOrder(order._id, order.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
                         </tr>)}
                     </tbody>
                 </table>

@@ -5,6 +5,7 @@ import { TbListDetails } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+    const Admin = true
     return (
         <div className="lg:flex">
             <div>
@@ -20,8 +21,13 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu bg-base-200 text-base-content min-h-full w-72 p-12">
                             {/* Sidebar content here */}
-                            <NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>
-                            <NavLink className="flex items-center gap-2 mb-3" to="order"> <TbListDetails className="text-xl" />My Orders</NavLink>
+                            {Admin
+                                ? <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" />Admin Profile</NavLink>
+                                    <NavLink className="flex items-center gap-2 mb-3" to="all-orders"> <TbListDetails className="text-xl" />All Orders</NavLink></>
+                                :
+                                <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>
+                                  <NavLink className="flex items-center gap-2 mb-3" to="order"> <TbListDetails className="text-xl" />My Orders</NavLink></>
+                            }
 
 
                             <NavLink className="flex items-center gap-2 border-t-2 pt-3 mt-7 mb-3" to="/"><HiOutlineHome className="text-xl" />Home</NavLink>

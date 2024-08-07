@@ -35,6 +35,7 @@ const ShoesDetails = () => {
         const order = {
             name: userName,
             email: email,
+            image: user?.photoURL,
             location: location,
             contactNumber: contactNumber,
             productId: _id,
@@ -44,7 +45,8 @@ const ShoesDetails = () => {
             shoeSize: shoeSize,
             shoeColor: shoeColor,
             date: new Date(),
-            confirmation: "Pending"
+            confirmation: "Pending",
+            isPaid: false
         }
         console.log(order)
         try {
