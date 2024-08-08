@@ -1,52 +1,25 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
-import slider1 from "../../assets/image/slider-1.jpg"
-import slider2 from "../../assets/image/slider-2.jpg"
-import slider3 from "../../assets/image/slider-3.jpg"
-import slider4 from "../../assets/image/slider-4.jpg"
-import slider5 from "../../assets/image/slider-5.jpg"
-import BannerContent from './BannerContent';
+import { Link } from 'react-router-dom';
+
+import image from "../../assets/image/slider-1.jpg"
 const Banner = () => {
     return (
         <div>
-            <Swiper
-                spaceBetween={30}
-                effect={'fade'}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                navigation={true}
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[EffectFade, Navigation, Pagination, Autoplay]}
-                className="mySwiper"
-            >
-                <SwiperSlide>
-                    <BannerContent image={slider1}></BannerContent>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <BannerContent image={slider2}></BannerContent>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <BannerContent image={slider3}></BannerContent>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <BannerContent image={slider4}></BannerContent>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <BannerContent image={slider5}></BannerContent>
-                </SwiperSlide>
-            </Swiper>
+            <div>
+            <div className="hero bg-cover bg-center roboto-thin nunito" style={{ backgroundImage: `url(${image})` }}>
+                <div className="hero-overlay bg-gradient-to-r from-[#151515] to-[rgb(21,21,21,0) py-60 md:py-80"></div>
+                <div className=" w-[95%] md:w-[85%] mx-auto text-neutral-content">
+                    <div className="md:w-[50%]">
+                        <h1 className="mb-7 text-3xl md:4xl lg:text-6xl text-center md:text-start  font mt-4">StepStyle Step into Fashion!</h1>
+                        <p className='text-gray-300 md:text-gray-500 text-center md:text-start text-sm md:text-base mb-4'>Discover your perfect pair at StepStyle, where style meets comfort. Browse our extensive collection of the latest trends in footwear and find the ideal shoes for every occasion. Step up your fashion game and shop the newest arrivals today!</p>
+                        <div className='flex justify-center md:justify-start'>
+                            <button className="btn text-white border-none bg-[#1A2130] rounded-3xl w-44">
+                                <Link to="/shop">Shop Now</Link>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     );
 };

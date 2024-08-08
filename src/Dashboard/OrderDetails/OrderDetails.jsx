@@ -12,7 +12,7 @@ const OrderDetails = () => {
             </div>
             <div>
                 <h3 className="font-semibold text-2xl mb-4 ">Details</h3>
-               <div className="grid md:grid-cols-2 gap-2 gap-x-12">
+               <div className="grid md:grid-cols-2 gap-y-2 gap-x-12">
                <p className="flex items-center gap-2"><MdOutlineSend className="text-blue-500"/>Email: {order.email}</p>
                <p className="flex items-center gap-2"><MdOutlineSend className="text-blue-500"/>Location: {order.location}</p>
                <p className="flex items-center gap-2"><MdOutlineSend className="text-blue-500"/>Contact Number: {order.contactNumber}</p>
