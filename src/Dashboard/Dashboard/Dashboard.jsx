@@ -2,6 +2,7 @@ import { BsCardText } from "react-icons/bs";
 import { CgShoppingCart } from "react-icons/cg";
 import { HiOutlineHome } from "react-icons/hi";
 import { LuUser2 } from "react-icons/lu";
+import { MdOutlineChecklist } from "react-icons/md";
 import { TbListDetails } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -24,8 +25,9 @@ const Dashboard = () => {
                             {/* Sidebar content here */}
                             {Admin
                                 ? <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" />Admin Profile</NavLink>
-                                    <NavLink className="flex items-center gap-2 mb-3" to="all-orders"> <TbListDetails className="text-xl" />All Orders</NavLink>
+                                    <NavLink className="flex items-center gap-2 mb-3" to="all-orders"> <MdOutlineChecklist className="text-xl" />All Orders</NavLink>
                                     <NavLink className="flex items-center gap-2 mb-3" to="add-Product"> <BsCardText className="text-xl" />Add product</NavLink>
+                                    <NavLink className="flex items-center gap-2 mb-3" to="add-Product"> <TbListDetails className="text-xl" />All product</NavLink>
                                 </>
                                 :
                                 <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>

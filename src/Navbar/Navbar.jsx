@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import image from "../assets/image/logo.png"
 import profile from "../assets/image/user.avif"
 import { useContext } from "react";
 import { AuthContext } from "../Context/Context";
@@ -19,8 +18,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className="bg-white">
-      <div className="navbar w-[95%] md:w-[85%] mx-auto">
+    <div className="relative z-10 w-full bg-transparent bg-black text-white">
+      <div className="navbar absolute	w-[95%] md:w-[85%] mx-auto"  style={{ left: "50%", transform: "translateX(-50%)" }} >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,20 +37,19 @@ const Navbar = () => {
               <li><a>Item 3</a></li>
             </ul>
           </div>
-          <a className="mb-2">
-            <img className="w-24 h-16 " src={image} alt="" />
+          <a className="hidden md:block text-2xl lg:text-3xl font-semibold">
+            STEP STYLE
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
         </div>
         <div className="navbar-end">
-          <ul className="menu menu-horizontal px-1 gap-6 hidden lg:flex items-center mr-7">
+          <ul className="menu menu-horizontal font-semibold px-1 gap-6 hidden lg:flex items-center mr-7">
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/shop'>Shop</NavLink>
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
-            <NavLink>{user && <PiShoppingCartLight className="text-2xl text-gray-500" />}</NavLink>
-
+            <NavLink>{user && <PiShoppingCartLight className="text-2xl text-white" />}</NavLink>
           </ul>
           {
             user &&
@@ -60,7 +58,7 @@ const Navbar = () => {
                 <summary className="btn btn-ghost p-0 rounded-full m-1">
                   <img className="object-cover w-12 h-12 border-2  rounded-full avatar" src={user.photoURL ? user.photoURL : profile} />
                 </summary>
-                <ul className="p-2 shadow menu dropdown-content z-10 bg-base-100 rounded-box w-52">
+                <ul className="p-2 shadow menu dropdown-content text-black z-10 bg-base-100 rounded-box w-52">
                   <li><a>{user.displayName}</a></li>
                   <li onClick={handleSignOut}><a><VscSignOut className="text-xl" />Sign Out</a></li>
                 </ul>
