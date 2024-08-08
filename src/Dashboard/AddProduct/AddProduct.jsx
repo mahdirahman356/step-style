@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import Select from 'react-select'
 import { imageUplode } from '../../imageAPI';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 
 const AddProduct = () => {
 
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedColor, setSelectedColor] = useState([])
     const [selectedSize, setSelectedSize] = useState([])
     const [productImage, setProductImage] = useState(null)
+
+    const axiosSecure = useAxiosSecure()
 
     const handleAddProduct = async(e) => {
         e.preventDefault()
@@ -17,28 +21,55 @@ const AddProduct = () => {
         const description = from.description.value
         const brand = from.brand.value
         const category = from.category.value
-        const colour = from.colour.value
         let image = from.image.files[0];
+        let url = productImage
+
 
         try {
-            let url ;
-            if (image) {
+            if (image && !productImage) {
                 const uploadResult = await imageUplode(image);
                 url = uploadResult;
+                console.log(uploadResult)
+                setProductImage(url);
             }
 
-            setProductImage(url)
 
         } catch (err) {
             console.log(err);
         }
-        console.log(name, price, description, brand, category, colour, selectedOptions, selectedSize, productImage)
+        console.log(name, price, description, brand, category,  selectedColor, selectedSize, productImage)
+
+        const product = {
+            name: name,
+            price: price,
+            description: description,
+            brand: brand,
+            image: url,
+            date: new Date().toISOString(),
+            size: selectedSize,
+            color: selectedColor,
+            category: category
+
+        }
+        console.log(product)
+
+     const res = await   axiosSecure.post("/shoes", product) 
+     console.log(res.data)  
+     if(res.data.acknowledged) {
+        Swal.fire({
+            title: 'Success',
+            text: 'Your product has been successfully added',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        })
+     }
+    
     }
 
 
     const handleChange = (selected) => {
         const value = selected ? selected.map(option => option.value) : []
-        setSelectedOptions(value)
+        setSelectedColor(value)
     }
 
     const handleChecboxChange = (e) => {
@@ -48,12 +79,23 @@ const AddProduct = () => {
 
 
 
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
-
+   const color = [
+        { value: 'black', label: 'Black' },
+        { value: 'white', label: 'White' },
+        { value: 'red', label: 'Red' },
+        { value: 'blue', label: 'Blue' },
+        { value: 'brown', label: 'Brown' },
+        { value: 'gray', label: 'Gray' },
+        { value: 'green', label: 'Green' },
+        { value: 'yellow', label: 'Yellow' },
+        { value: 'orange', label: 'Orange' },
+        { value: 'purple', label: 'Purple' },
+        { value: 'pink', label: 'Pink' },
+        { value: 'beige', label: 'Beige' },
+        { value: 'tan', label: 'Tan' },
+        { value: 'navy', label: 'Navy' },
+        { value: 'burgundy', label: 'Burgundy' }
+    ];
     const category = [
         { value: 'Casual', label: 'Casual' },
         { value: 'Running', label: 'Running' },
@@ -93,7 +135,7 @@ const AddProduct = () => {
 
                     <Select name='category' styles={customStyles} placeholder="Select category" options={category} />
 
-                    <Select name='colour' onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={options} />
+                    <Select name='colour' onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={color} />
 
                     <div className='mb-4 mx-3'>
                         <span className="block text-gray-500 mb-1">Size</span>
