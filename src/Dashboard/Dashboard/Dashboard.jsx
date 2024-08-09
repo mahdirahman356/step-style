@@ -27,7 +27,7 @@ const Dashboard = () => {
                                 ? <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" />Admin Profile</NavLink>
                                     <NavLink className="flex items-center gap-2 mb-3" to="all-orders"> <MdOutlineChecklist className="text-xl" />All Orders</NavLink>
                                     <NavLink className="flex items-center gap-2 mb-3" to="add-Product"> <BsCardText className="text-xl" />Add product</NavLink>
-                                    <NavLink className="flex items-center gap-2 mb-3" to="add-Product"> <TbListDetails className="text-xl" />All product</NavLink>
+                                    <NavLink className="flex items-center gap-2 mb-3" to="all-Product"> <TbListDetails className="text-xl" />All product</NavLink>
                                 </>
                                 :
                                 <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>

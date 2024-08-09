@@ -9,10 +9,9 @@ const WelcomeSection = () => {
                         src={welcome}
                         className="md:max-w-sm rounded-lg shadow-2xl" />
                     <div>
-                        <h1 className="text-3xl md:text-5xl font-bold nunito">Welcome to StepStyle</h1>
+                        <h1 className="text-4xl md:text-5xl font-bold nunito text-gray-700 header-font">Welcome to <br /><span className="text-[#cbbd87]">Step Style</span></h1>
                         <p className="text-sm md:text-base py-6 md:w-[60%] nunito">
-                        Welcome to StepStyle, your ultimate destination for fashionable and comfortable footwear. Our selection ensures every step you take is in style. From everyday sneakers to special occasion shoes, we have something for everyone. Browse our new arrivals, take advantage of our special deals, and enjoy a seamless shopping experience. Step up your shoe game with StepStyle!
-                        </p>
+                        Welcome to StepStyle, your go-to for stylish and comfortable footwear. Explore our range from everyday sneakers to special occasion shoes. Discover new arrivals, special deals, and enjoy a seamless shopping experience. Step up your shoe game with StepStyle!                        </p>
                     </div>
                 </div>
             </div>

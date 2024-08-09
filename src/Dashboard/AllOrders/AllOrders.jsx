@@ -15,7 +15,7 @@ const AllOrders = () => {
         }
     }) 
 
-    const handleDeleteOrder = (id, productName) => {
+    const handleDeleteOrder = (id, name) => {
         console.log(id)
 
         Swal.fire({
@@ -34,7 +34,7 @@ const AllOrders = () => {
              if(res.data.deletedCount > 0){
               Swal.fire({
                   title: "Deleted!",
-                  text: `${productName} has been deleted.`,
+                  text: `${name} order has been deleted.`,
                   icon: "success"
                 });
              }
@@ -72,7 +72,7 @@ const AllOrders = () => {
                             </span></td>
                             <td>{orders.isPaid === true ? "Paid" : "Not Paid"}</td>
                             <td>{orders.confirmation}</td>
-                            <td><span onClick={() => handleDeleteOrder(orders._id, orders.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
+                            <td><span onClick={() => handleDeleteOrder(orders._id, orders.name)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
                         </tr>)}
                     </tbody>
                 </table>

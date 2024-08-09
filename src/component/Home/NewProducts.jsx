@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { Link } from "react-router-dom";
+import "../../style.css"
 const NewProducts = () => {
     const axiosCommon = useAxiosCommon()
     const { data: shoes = [] } = useQuery({
@@ -17,7 +18,7 @@ const NewProducts = () => {
     })  
     return (
         <div className="my-10 w-[95%] md:w-[80%] mx-auto md:my-28">
-        <h1 className="text-3xl md:text-5xl my-16 font-bold nunito border-l-4 border-gray-800 pl-4">New Products</h1>
+        <h1 className="header-font text-3xl md:text-5xl my-16 font-bold border-l-4 border-gray-800 pl-4">New Products</h1>
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
             {
                 shoes.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">

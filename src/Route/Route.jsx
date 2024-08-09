@@ -12,6 +12,7 @@ import Orders from "../Dashboard/Orders/Orders";
 import AllOrders from "../Dashboard/AllOrders/AllOrders";
 import OrderDetails from "../Dashboard/OrderDetails/OrderDetails";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
+import AllProduct from "../Dashboard/AllProduct/AllProduct";
 
 export const router = createBrowserRouter([
     {
@@ -65,7 +66,11 @@ export const router = createBrowserRouter([
             {
                 path: "add-Product",
                 element:<AddProduct></AddProduct>
-            }
+            },
+            {
+                path: "all-Product",
+                element:<AllProduct></AllProduct>
+            },
         ]
     }
 ]);
