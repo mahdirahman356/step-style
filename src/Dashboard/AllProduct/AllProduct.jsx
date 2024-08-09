@@ -4,6 +4,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiOutlineEdit } from "react-icons/ai";
 import { TbEye } from "react-icons/tb";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const AllProduct = () => {
 
@@ -18,32 +19,32 @@ const AllProduct = () => {
         }
     })
 
-    const handleDelete = async(id, productName) => {
-      console.log(id)
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-        axiosSecure.delete(`/shoes-delete/${id}`)
-        .then(res => {
-           console.log(res.data)
-           if(res.data.deletedCount > 0){
-            Swal.fire({
-                title: "Deleted!",
-                text: `${productName} has been deleted.`,
-                icon: "success"
-              });
-           }
-           refetch()
-        })
-        }
-      });
+    const handleDelete = async (id, productName) => {
+        console.log(id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/shoes-delete/${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${productName} has been deleted.`,
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+                    })
+            }
+        });
 
     }
 
@@ -63,10 +64,12 @@ const AllProduct = () => {
                         <div className="card-body text-center">
                             <h2 className="font-semibold">{products.name}</h2>
                             <div className="flex justify-center gap-1">
-                            <span className="btn btn-sm btn-ghost"><TbEye className="text-xl" /></span>
-                            <span className="btn btn-sm btn-ghost"><AiOutlineEdit className="text-xl " /></span>
-                            <span onClick={() => handleDelete(products._id, products.name)} className="btn btn-sm btn-ghost"><RiDeleteBin5Line className="text-xl text-red-500" /></span>
-                        </div>
+                                <Link to={`shoes-details/${products._id}`}>
+                                    <span className="btn btn-sm btn-ghost"><TbEye className="text-xl" /></span>
+                                </Link>
+                                <span className="btn btn-sm btn-ghost"><AiOutlineEdit className="text-xl " /></span>
+                                <span onClick={() => handleDelete(products._id, products.name)} className="btn btn-sm btn-ghost"><RiDeleteBin5Line className="text-xl text-red-500" /></span>
+                            </div>
                         </div>
                     </div>)
                 }

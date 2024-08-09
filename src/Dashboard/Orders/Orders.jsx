@@ -73,7 +73,7 @@ const Orders = () => {
                             <td>{order.productPrice}$</td>
                             <td>{order.date.split("T")[0]}</td>
                             <td><span className="text-blue-500 btn btn-sm">
-                               <Link to={`/shoes-details/${order.productId}`}>View Details</Link>
+                               <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
                             </span>
                             </td>
                             <td><span className="text-blue-500 btn btn-sm">Pay</span></td>

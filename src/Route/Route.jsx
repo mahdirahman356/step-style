@@ -6,13 +6,14 @@ import SignUp from "../component/Login/SignUp";
 import Profile from "../Dashboard/Profile/Profile";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
 import Shop from "../component/Shop/Shop";
-import ShoesDetails from "../component/ShoesDetails/ShoesDetails";
+import ShoesOrder from "../component/ShoesOrder/ShoesOrder";
 import Dashboard from "../Dashboard/Dashboard/Dashboard";
 import Orders from "../Dashboard/Orders/Orders";
 import AllOrders from "../Dashboard/AllOrders/AllOrders";
 import OrderDetails from "../Dashboard/OrderDetails/OrderDetails";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
 import AllProduct from "../Dashboard/AllProduct/AllProduct";
+import ShoesDetails from "../Dashboard/ShoesDetails/ShoesDetails";
 
 export const router = createBrowserRouter([
     {
@@ -36,9 +37,9 @@ export const router = createBrowserRouter([
                 element:<Shop></Shop>
             },
             {
-                path: "/shoes-details/:id",
+                path: "/shoes-order/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
-                element:<PrivetRoute><ShoesDetails></ShoesDetails></PrivetRoute>
+                element:<PrivetRoute><ShoesOrder></ShoesOrder></PrivetRoute>
             }
         ]
     },
@@ -71,6 +72,11 @@ export const router = createBrowserRouter([
                 path: "all-Product",
                 element:<AllProduct></AllProduct>
             },
+            {
+                path: "/dashboard/all-Product/shoes-details/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
+                element:<ShoesDetails></ShoesDetails>
+            }
         ]
     }
 ]);

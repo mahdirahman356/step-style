@@ -8,13 +8,13 @@ import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
 import "../../style.css"
 
-const ShoesDetails = () => {
+const ShoesOrder = () => {
     const shoes = useLoaderData()
     const { user } = useContext(AuthContext)
     const [TheUser, SetTheUser] = useState([])
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    const {_id, name, price, image, brand, description, size, color, category } = shoes[0]
+    const { _id, name, price, image, brand, description, size, color, category } = shoes[0]
     useEffect(() => {
         axiosSecure.get(`/users/email/${user.email}`)
             .then(res => {
@@ -23,7 +23,7 @@ const ShoesDetails = () => {
             })
     }, [])
 
-       const handleOrder = async(e) => {
+    const handleOrder = async (e) => {
         e.preventDefault();
         let form = e.target;
         let userName = form.userName.value;
@@ -50,22 +50,22 @@ const ShoesDetails = () => {
         }
         console.log(order)
         try {
-          const res = await  axiosSecure.post('/order', order)
-          console.log(res.data)
-          if(res.data.acknowledged){
-            Swal.fire({
-                title: 'Success',
-                text: 'Thank you for your order! Your product has been ordered. Please complete the payment to receive it.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            })
-            navigate("/dashboard/order")
-          }
+            const res = await axiosSecure.post('/order', order)
+            console.log(res.data)
+            if (res.data.acknowledged) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Thank you for your order! Your product has been ordered. Please complete the payment to receive it.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                navigate("/dashboard/order")
+            }
 
         } catch (error) {
             console.log(error)
         }
-        
+
     }
 
     return (
@@ -141,20 +141,20 @@ const ShoesDetails = () => {
                             placeholder="Contact Number"
                             required />
                     </label>
-                   <div className="flex flex-col lg:flex-row gap-2"> 
-                     {/* your shoe size */}
-                     <select name="shoeSize" className="select select-bordered w-full rounded-3xl" required>
+                    <div className="flex flex-col lg:flex-row gap-2">
+                        {/* your shoe size */}
+                        <select name="shoeSize" className="select select-bordered w-full rounded-3xl" required>
                             <option value="" disabled selected>Select your shoe size</option>
-                            {size.map((sz, index) =>  
-                            <option value={sz} key={index}>{sz}</option>)}
+                            {size.map((sz, index) =>
+                                <option value={sz} key={index}>{sz}</option>)}
                         </select>
-                    {/* shoe color */}
+                        {/* shoe color */}
                         <select name="shoeColor" className="select select-bordered w-full rounded-3xl" required>
                             <option value="" disabled selected>Select your shoe Color</option>
-                            {color.map((clr, index) =>  
-                            <option value={clr} key={index}>{clr}</option>)}
+                            {color.map((clr, index) =>
+                                <option value={clr} key={index}>{clr}</option>)}
                         </select>
-                   </div>
+                    </div>
 
                     <button className="btn w-full rounded-3xl bg-[#1A2130] text-white">
                         order
@@ -165,4 +165,4 @@ const ShoesDetails = () => {
     );
 };
 
-export default ShoesDetails;
+export default ShoesOrder;
