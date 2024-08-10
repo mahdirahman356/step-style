@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import Select from 'react-select'
-import { imageUplode } from '../../imageAPI';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
+import { imageUplode } from "../../imageAPI";
 
+const ProductUpdate = () => {
+    const product = useLoaderData()
+    console.log(product[0])
 
-const AddProduct = () => {
+    const { name, price, image, description, brand, category, color, size } = product[0]
 
     const [selectedColor, setSelectedColor] = useState([])
     const [selectedSize, setSelectedSize] = useState([])
     const [productImage, setProductImage] = useState(null)
 
-    const axiosSecure = useAxiosSecure()
+    // const axiosSecure = useAxiosSecure()
 
-    const handleAddProduct = async(e) => {
+    useEffect(() => {
+        const defaultColor = colorOptions.filter(option => color.includes(option.value));
+        const defaultSize = sizeOption.filter(option => size.includes(option.value));
+        setSelectedColor(defaultColor);
+        setSelectedSize(defaultSize)
+    }, [color]);
+
+    const handleAddProduct = async (e) => {
         e.preventDefault()
         const from = e.target
         const name = from.name.value
@@ -21,13 +30,13 @@ const AddProduct = () => {
         const description = from.description.value
         const brand = from.brand.value
         const category = from.category.value
-        let image = from.image.files[0];
-        let url = productImage
+        let img = from.image.files[0];
+ 
 
-
+        let url = image
         try {
-            if (image && !productImage) {
-                const uploadResult = await imageUplode(image);
+            if (img && !productImage) {
+                const uploadResult = await imageUplode(img);
                 url = uploadResult;
                 console.log(uploadResult)
                 setProductImage(url);
@@ -37,7 +46,7 @@ const AddProduct = () => {
         } catch (err) {
             console.log(err);
         }
-        console.log(name, price, description, brand, category,  selectedColor, selectedSize, productImage)
+        console.log(name, price, description, brand, category, selectedColor, selectedSize, productImage)
 
         const product = {
             name: name,
@@ -53,19 +62,20 @@ const AddProduct = () => {
         }
         console.log(product)
 
-     const res = await   axiosSecure.post("/shoes", product) 
-     console.log(res.data)  
-     if(res.data.acknowledged) {
-        Swal.fire({
-            title: 'Success',
-            text: 'Your product has been successfully added',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        })
-     }
-    
+        // const res = await axiosSecure.post("/shoes", product)
+        // console.log(res.data)
+        // if (res.data.acknowledged) {
+        //     Swal.fire({
+        //         title: 'Success',
+        //         text: 'Your product has been successfully added',
+        //         icon: 'success',
+        //         confirmButtonText: 'OK'
+        //     })
+        // }
+
     }
 
+    console.log(selectedColor, setSelectedSize)
 
     const handleChange = (selected) => {
         const value = selected ? selected.map(option => option.value) : []
@@ -77,9 +87,7 @@ const AddProduct = () => {
         setSelectedSize(value)
     }
 
-
-
-   const color = [
+    const colorOptions = [
         { value: 'black', label: 'Black' },
         { value: 'white', label: 'White' },
         { value: 'red', label: 'Red' },
@@ -96,12 +104,12 @@ const AddProduct = () => {
         { value: 'navy', label: 'Navy' },
         { value: 'burgundy', label: 'Burgundy' }
     ];
-    const category = [
+    const categoryOptions = [
         { value: 'Casual', label: 'Casual' },
         { value: 'Running', label: 'Running' },
     ]
 
-    const size = [
+    const sizeOption = [
         { value: '6', label: '6' },
         { value: '7', label: '7' },
         { value: '8', label: '8' },
@@ -109,6 +117,11 @@ const AddProduct = () => {
         { value: '10', label: '10' },
         { value: '11', label: '11' },
     ]
+
+    
+    const defaultCategory = categoryOptions.find(option => option.value === category);
+
+
 
     const customStyles = {
         control: (provided) => ({
@@ -131,23 +144,33 @@ const AddProduct = () => {
         }),
     };
 
-
     return (
-        <div className="w-[95%] mx-auto">
-            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Add Product</h2>
+        <div>
+            <div className="w-[95%] mx-auto">
+            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Product Update</h2>
             <form onSubmit={handleAddProduct}>
                 <div className="grid md:grid-cols-2 gap-8 mb-6">
-                    <input type="text" placeholder="Product Name" name="name" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Product Price" name="price" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Description" name="description" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Brand" name="brand" className="input input-bordered rounded-3xl rou w-full" />
+                    <input type="text" defaultValue={name} placeholder="Product Name" name="name" className="input input-bordered rounded-3xl rou w-full" />
+                    <input type="text" defaultValue={price} placeholder="Product Price" name="price" className="input input-bordered rounded-3xl rou w-full" />
+                    <input type="text" defaultValue={description} placeholder="Description" name="description" className="input input-bordered rounded-3xl rou w-full" />
+                    <input type="text" defaultValue={brand} placeholder="Brand" name="brand" className="input input-bordered rounded-3xl rou w-full" />
 
-                    <Select name='category' styles={customStyles} placeholder="Select category" options={category} />
+                    <Select name='category' defaultValue={defaultCategory}  styles={customStyles} placeholder="Select category" options={categoryOptions} />
 
-                    <Select name='colour' onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={color} />
+                    <Select name='colour' value={selectedColor} onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={colorOptions} />
 
-                    <Select name='size' onChange={handleSize} styles={customStyles} placeholder="Select Size" isMulti={true} options={size} />
+                    <Select name='size'  value={selectedSize} onChange={handleSize} styles={customStyles} placeholder="Select Size" isMulti={true} options={size} />
 
+
+                    {/* <div className='mb-4 mx-3'>
+                        <span className="block text-gray-500 mb-1">Size</span>
+                        <div className="flex flex-wrap justify-between">
+                            {["6", "7", "8", "9", "10", "11"].map((si, index) =>
+                                <div key={index} className="flex items-center">
+                                    <input onChange={handleChecboxChange}  type="checkbox" name='size' value={si} className="checkbox checkbox-sm mr-2" /><p className="text-gray-500">{si}</p>
+                                </div>)}
+                        </div>
+                    </div> */}
 
                 </div>
 
@@ -169,7 +192,8 @@ const AddProduct = () => {
                 </button>
             </form>
         </div>
+        </div>
     );
 };
 
-export default AddProduct;
+export default ProductUpdate;

@@ -67,7 +67,9 @@ const AllProduct = () => {
                                 <Link to={`shoes-details/${products._id}`}>
                                     <span className="btn btn-sm btn-ghost"><TbEye className="text-xl" /></span>
                                 </Link>
+                                <Link to={`/dashboard/all-Product/product-update/${products._id}`}>
                                 <span className="btn btn-sm btn-ghost"><AiOutlineEdit className="text-xl " /></span>
+                                </Link>
                                 <span onClick={() => handleDelete(products._id, products.name)} className="btn btn-sm btn-ghost"><RiDeleteBin5Line className="text-xl text-red-500" /></span>
                             </div>
                         </div>

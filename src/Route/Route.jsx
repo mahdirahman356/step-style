@@ -14,6 +14,7 @@ import OrderDetails from "../Dashboard/OrderDetails/OrderDetails";
 import AddProduct from "../Dashboard/AddProduct/AddProduct";
 import AllProduct from "../Dashboard/AllProduct/AllProduct";
 import ShoesDetails from "../Dashboard/ShoesDetails/ShoesDetails";
+import ProductUpdate from "../Dashboard/ProductUpdate/ProductUpdate";
 
 export const router = createBrowserRouter([
     {
@@ -76,6 +77,11 @@ export const router = createBrowserRouter([
                 path: "/dashboard/all-Product/shoes-details/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
                 element:<ShoesDetails></ShoesDetails>
+            },
+            {
+                path: "/dashboard/all-Product/product-update/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
+                element:<ProductUpdate></ProductUpdate>
             }
         ]
     }
