@@ -76,7 +76,9 @@ const Orders = () => {
                                <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
                             </span>
                             </td>
-                            <td><span className="text-blue-500 btn btn-sm">Pay</span></td>
+                            <td>
+                                <Link to="/dashboard/order/payment"><span className="text-blue-500 btn btn-sm">Pay</span></Link>
+                            </td>
                             <td>{order.confirmation}</td>
                             <td><span onClick={() => handleDeleteOrder(order._id, order.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
                         </tr>)}

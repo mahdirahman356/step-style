@@ -15,6 +15,7 @@ import AddProduct from "../Dashboard/AddProduct/AddProduct";
 import AllProduct from "../Dashboard/AllProduct/AllProduct";
 import ShoesDetails from "../Dashboard/ShoesDetails/ShoesDetails";
 import ProductUpdate from "../Dashboard/ProductUpdate/ProductUpdate";
+import Payment from "../Dashboard/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
             {
                 path: "order",
                 element:<PrivetRoute><Orders></Orders></PrivetRoute>
+            },
+            {
+                path: "/dashboard/order/payment",
+                element:<Payment></Payment>
             },
             {
                 path: "all-orders",

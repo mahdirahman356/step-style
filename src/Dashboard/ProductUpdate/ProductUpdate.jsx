@@ -2,25 +2,28 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Select from 'react-select'
 import { imageUplode } from "../../imageAPI";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ProductUpdate = () => {
     const product = useLoaderData()
     console.log(product[0])
 
-    const { name, price, image, description, brand, category, color, size } = product[0]
+    const {_id, name, price, image, description, brand, category, color, size } = product[0]
 
     const [selectedColor, setSelectedColor] = useState([])
     const [selectedSize, setSelectedSize] = useState([])
     const [productImage, setProductImage] = useState(null)
 
-    // const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
         const defaultColor = colorOptions.filter(option => color.includes(option.value));
         const defaultSize = sizeOption.filter(option => size.includes(option.value));
-        setSelectedColor(defaultColor);
-        setSelectedSize(defaultSize)
+        setSelectedColor(defaultColor.map(option => option.value));
+        setSelectedSize(defaultSize.map(option => option.value))
     }, [color]);
+
 
     const handleAddProduct = async (e) => {
         e.preventDefault()
@@ -31,7 +34,7 @@ const ProductUpdate = () => {
         const brand = from.brand.value
         const category = from.category.value
         let img = from.image.files[0];
- 
+
 
         let url = image
         try {
@@ -62,16 +65,16 @@ const ProductUpdate = () => {
         }
         console.log(product)
 
-        // const res = await axiosSecure.post("/shoes", product)
-        // console.log(res.data)
-        // if (res.data.acknowledged) {
-        //     Swal.fire({
-        //         title: 'Success',
-        //         text: 'Your product has been successfully added',
-        //         icon: 'success',
-        //         confirmButtonText: 'OK'
-        //     })
-        // }
+        const res = await axiosSecure.put(`/shoes-update/${_id}`, product)
+        console.log(res.data)
+        if (res.data.modifiedCount > 0) {
+            Swal.fire({
+                title: 'Success',
+                text: 'Your product has been successfully  updated',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        }
 
     }
 
@@ -118,7 +121,7 @@ const ProductUpdate = () => {
         { value: '11', label: '11' },
     ]
 
-    
+
     const defaultCategory = categoryOptions.find(option => option.value === category);
 
 
@@ -147,51 +150,61 @@ const ProductUpdate = () => {
     return (
         <div>
             <div className="w-[95%] mx-auto">
-            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Product Update</h2>
-            <form onSubmit={handleAddProduct}>
-                <div className="grid md:grid-cols-2 gap-8 mb-6">
-                    <input type="text" defaultValue={name} placeholder="Product Name" name="name" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" defaultValue={price} placeholder="Product Price" name="price" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" defaultValue={description} placeholder="Description" name="description" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" defaultValue={brand} placeholder="Brand" name="brand" className="input input-bordered rounded-3xl rou w-full" />
+                <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Product Update</h2>
+                <form onSubmit={handleAddProduct}>
+                    <div className="grid md:grid-cols-2 gap-8 mb-6">
+                        <input type="text" defaultValue={name} placeholder="Product Name" name="name" className="input input-bordered rounded-3xl rou w-full" />
+                        <input type="text" defaultValue={price} placeholder="Product Price" name="price" className="input input-bordered rounded-3xl rou w-full" />
+                        <input type="text" defaultValue={description} placeholder="Description" name="description" className="input input-bordered rounded-3xl rou w-full" />
+                        <input type="text" defaultValue={brand} placeholder="Brand" name="brand" className="input input-bordered rounded-3xl rou w-full" />
 
-                    <Select name='category' defaultValue={defaultCategory}  styles={customStyles} placeholder="Select category" options={categoryOptions} />
+                        <Select
+                            name='category'
+                            defaultValue={defaultCategory}
+                            styles={customStyles}
+                            placeholder="Select category"
+                            options={categoryOptions} />
 
-                    <Select name='colour' value={selectedColor} onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={colorOptions} />
+                        <Select
+                            name='colour'
+                            value={selectedColor.map(colorValue => colorOptions.find(option => option.value === colorValue))}
+                            onChange={handleChange}
+                            styles={customStyles}
+                            placeholder="Select colour"
+                            isMulti={true}
+                            options={colorOptions} />
 
-                    <Select name='size'  value={selectedSize} onChange={handleSize} styles={customStyles} placeholder="Select Size" isMulti={true} options={size} />
+                        <Select
+                            name='size' 
+                            value={selectedSize.map(sizeValue => sizeOption.find(option => option.value === sizeValue))}
+                            onChange={handleSize} 
+                            styles={customStyles} 
+                            placeholder="Select Size" 
+                            isMulti={true} 
+                            options={sizeOption} />
 
 
-                    {/* <div className='mb-4 mx-3'>
-                        <span className="block text-gray-500 mb-1">Size</span>
-                        <div className="flex flex-wrap justify-between">
-                            {["6", "7", "8", "9", "10", "11"].map((si, index) =>
-                                <div key={index} className="flex items-center">
-                                    <input onChange={handleChecboxChange}  type="checkbox" name='size' value={si} className="checkbox checkbox-sm mr-2" /><p className="text-gray-500">{si}</p>
-                                </div>)}
-                        </div>
-                    </div> */}
 
-                </div>
-
-                  
-                <p className="mt-3 text-gray-500 mb-1 text-sm ml-2">Product Image</p>
-                <label htmlFor="image" className=" flex md:w-1/2 mb-5 items-center justify-center px-3 py-3  text-center bg-white border-2 border-dashed rounded-lg cursor-pointer ">
-                    <div className=''>
-                    <input
-                        type="file"
-                        name="image"
-                        className="file-input h-36 bg-[#1A2130] border-none text-white w-full max-w-xs"
-                        accept="image/*"
-                    />
                     </div>
-                </label>
 
-                <button className="btn w-64 mb-5 rounded-3xl bg-[#1A2130] text-white">
-                    Continue
-                </button>
-            </form>
-        </div>
+
+                    <p className="mt-3 text-gray-500 mb-1 text-sm ml-2">Product Image</p>
+                    <label htmlFor="image" className=" flex md:w-1/2 mb-5 items-center justify-center px-3 py-3  text-center bg-white border-2 border-dashed rounded-lg cursor-pointer ">
+                        <div className=''>
+                            <input
+                                type="file"
+                                name="image"
+                                className="file-input h-36 bg-[#1A2130] border-none text-white w-full max-w-xs"
+                                accept="image/*"
+                            />
+                        </div>
+                    </label>
+
+                    <button className="btn w-64 mb-5 rounded-3xl bg-[#1A2130] text-white">
+                        Continue
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };
