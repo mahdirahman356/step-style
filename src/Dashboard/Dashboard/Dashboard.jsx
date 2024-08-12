@@ -31,7 +31,7 @@ const Dashboard = () => {
                                 </>
                                 :
                                 <><NavLink className="flex items-center gap-2 mb-3" to="profile"><LuUser2 className="text-xl" /> Profile</NavLink>
-                                  <NavLink className="flex items-center gap-2 mb-3" to="order"> <TbListDetails className="text-xl" />My Orders</NavLink></>
+                                    <NavLink className="flex items-center gap-2 mb-3" to="order"> <TbListDetails className="text-xl" />My Orders</NavLink></>
                             }
 
 

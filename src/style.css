@@ -13,4 +13,6 @@
   .header-font{
     font-family: "Montserrat Subrayada";
   }
-  
+  .slick-slide > div {
+     margin: 0 10px;
+  }
