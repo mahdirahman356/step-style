@@ -16,6 +16,7 @@ import AllProduct from "../Dashboard/AllProduct/AllProduct";
 import ShoesDetails from "../Dashboard/ShoesDetails/ShoesDetails";
 import ProductUpdate from "../Dashboard/ProductUpdate/ProductUpdate";
 import Payment from "../Dashboard/Dashboard/Payment/Payment";
+import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -88,6 +89,10 @@ export const router = createBrowserRouter([
                 path: "/dashboard/all-Product/product-update/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
                 element:<ProductUpdate></ProductUpdate>
+            },
+            {
+                path: "payment-history",
+                element:<PaymentHistory></PaymentHistory>
             }
         ]
     }
