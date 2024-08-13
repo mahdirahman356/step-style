@@ -58,7 +58,8 @@ export const router = createBrowserRouter([
                 element:<PrivetRoute><Orders></Orders></PrivetRoute>
             },
             {
-                path: "/dashboard/order/payment",
+                path: "/dashboard/order/payment/:id",
+                loader: ({params}) => fetch(`http://localhost:5000/order/${params.id}`),
                 element:<Payment></Payment>
             },
             {

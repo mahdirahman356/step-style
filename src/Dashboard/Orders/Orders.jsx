@@ -12,16 +12,16 @@ const Orders = () => {
         queryKey: ["order"],
         queryFn: async () => {
             const res = await axiosSecure.get(`/order/email/${user.email}`)
-            const recentOrders = res.data.sort((a,b) => new Date(b.date) - new Date(a.date))
+            const recentOrders = res.data.sort((a, b) => new Date(b.date) - new Date(a.date))
             console.log(res.data)
             return recentOrders
         }
     })
-    
-    const handleDeleteOrder = (id, productName) => {
-          console.log(id)
 
-          Swal.fire({
+    const handleDeleteOrder = (id, productName) => {
+        console.log(id)
+
+        Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
@@ -29,22 +29,22 @@ const Orders = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-            axiosSecure.delete(`/order-delete/${id}`)
-            .then(res => {
-               console.log(res.data)
-               if(res.data.deletedCount > 0){
-                Swal.fire({
-                    title: "Deleted!",
-                    text: `${productName} has been deleted.`,
-                    icon: "success"
-                  });
-               }
-               refetch()
-            })
+                axiosSecure.delete(`/order-delete/${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${productName} has been deleted.`,
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+                    })
             }
-          });
+        });
     }
 
     return (
@@ -73,11 +73,17 @@ const Orders = () => {
                             <td>{order.productPrice}$</td>
                             <td>{order.date.split("T")[0]}</td>
                             <td><span className="text-blue-500 btn btn-sm">
-                               <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
+                                <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
                             </span>
                             </td>
                             <td>
-                                <Link to="/dashboard/order/payment"><span className="text-blue-500 btn btn-sm">Pay</span></Link>
+                                {!order.isPaid ?
+                                    <Link to={`/dashboard/order/payment/${order._id}`}>
+                                        <span className="text-blue-500 btn btn-sm">Pay</span>
+                                    </Link>
+                                    : 
+                                   <span className="text-blue-500 btn btn-sm" disabled>Paid</span>}
+
                             </td>
                             <td>{order.confirmation}</td>
                             <td><span onClick={() => handleDeleteOrder(order._id, order.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
