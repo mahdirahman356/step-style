@@ -17,6 +17,7 @@ import ShoesDetails from "../Dashboard/ShoesDetails/ShoesDetails";
 import ProductUpdate from "../Dashboard/ProductUpdate/ProductUpdate";
 import Payment from "../Dashboard/Dashboard/Payment/Payment";
 import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
+import AllUsers from "../Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
             {
                 path: "all-Product",
                 element:<AllProduct></AllProduct>
+            },
+            {
+                path: "all-users",
+                element:<AllUsers></AllUsers>
             },
             {
                 path: "/dashboard/all-Product/shoes-details/:id",
