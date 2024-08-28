@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import shopImage from "../../assets/image/shop.avif"
+import shopImage from "../../assets/image/shop.png"
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import "../../style.css"
 import { Link } from "react-router-dom";
@@ -57,7 +57,7 @@ const Shop = () => {
                         src={shopImage}
                         className="w-full md:max-w-lg" />
                     <div className="">
-                        <h1 className="text-4xl md:text-5xl font-bold header-font">Exclusive Shoe Collection</h1>
+                        <h1 className="text-4xl md:text-5xl text-gray-700 header-font">Exclusive Shoe Collection</h1>
                         <p className="py-6 md:w-[50%]">
                             Explore our exclusive collection of shoes, designed for style, comfort, and every occasion. Find your perfect pair today!
                         </p>
@@ -65,7 +65,7 @@ const Shop = () => {
                 </div>
             </div>
 
-            <div className=" w-[95%] my-24 md:w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+            <div className="mb-24 w-[95%] md:w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 {
                     Allshoes.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                         <div className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" style={{ backgroundImage: `url(${shoes.image})` }}></div>
