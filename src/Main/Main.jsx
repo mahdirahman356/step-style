@@ -3,7 +3,7 @@ import Navbar from "../Navbar/Navbar";
 
 const Main = () => {
     const location = useLocation()
-    let hideNavbaerAndFooter = location.pathname.includes('/login') || location.pathname.includes('/sign-up')
+    let hideNavbaerAndFooter = location.pathname.includes('/login') || location.pathname.includes('/sign-up') 
     return (
         <div>
             {hideNavbaerAndFooter || <Navbar></Navbar>}

@@ -3,6 +3,7 @@ import profile from "../assets/image/user.avif"
 import { useContext } from "react";
 import { AuthContext } from "../Context/Context";
 import { VscSignOut } from "react-icons/vsc";
+import "../style.css"
 import { PiShoppingCartLight } from "react-icons/pi";
 const Navbar = () => {
   const { user, userLogOut } = useContext(AuthContext)
@@ -17,8 +18,11 @@ const Navbar = () => {
       })
   }
 
+  let hideNavbaerAndFooter = location.pathname.includes('/shop')
+
+   console.log(hideNavbaerAndFooter)
   return (
-    <div className="relative z-10 w-full bg-transparent bg-black text-white">
+    <div className={`relative z-10 w-full bg-transparent bg-black ${hideNavbaerAndFooter ? "text-black" : "text-white"}`}>
       <div className="navbar absolute	w-[95%] md:w-[85%] mx-auto"  style={{ left: "50%", transform: "translateX(-50%)" }} >
         <div className="navbar-start">
           <div className="dropdown">
@@ -44,7 +48,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
         </div>
         <div className="navbar-end">
-          <ul className="menu menu-horizontal font-semibold px-1 gap-6 hidden lg:flex items-center mr-7">
+          <ul className="menu menu-horizontal px-1 gap-6 hidden lg:flex items-center mr-7">
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/shop'>Shop</NavLink>

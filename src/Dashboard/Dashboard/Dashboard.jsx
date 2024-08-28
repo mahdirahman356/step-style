@@ -8,7 +8,7 @@ import { TbListDetails } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-    const Admin = true
+    const Admin = false
     return (
         <div className="lg:flex">
             <div>
