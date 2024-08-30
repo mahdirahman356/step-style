@@ -13,14 +13,14 @@ const ShoesDetailsModal = ({id}) => {
     })
 
     console.log(shoesDetails)
+    const shoe = shoesDetails[0] || {}
 
-    const {image, price, brand, description, category, name, size, color} = shoesDetails[0]
+    const {image, price, brand, description, category, name, size = [], color = []} = shoe
 
 
     return (
         <div>
             <div className=" overflow-hidden bg-white md:rounded-lg nunito">
-            {/* <img src={image} alt="" className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500 rounded-t-xl" /> */}
             <img className="object-cover w-full h-64" src={image} alt="Article" />
 
                 <div className="p-6">

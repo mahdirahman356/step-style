@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import shopImage from "../../assets/image/shop.png"
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import "../../style.css"
-import { Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { useState } from "react";
 import ShoesDetailsModal from "../ShoesDetailsModal/ShoesDetailsModal";
+import ShoesOrderModal from "../ShoesOrderModal/ShoesOrderModal";
+import PrivetRoute from "../../PrivetRoute/PrivetRoute";
 const Shop = () => {
     const [search, setSearch] = useState("")
     const [sortOption, setSortOption] = useState("");
@@ -106,22 +107,22 @@ const Shop = () => {
                                 className="flex flex-col justify-center w-full h-full px-8 py-4 transition-opacity duration-700 opacity-0 backdrop-blur-sm bg-gray-800/60 group-hover:opacity-100 bg-gray-300 bg-center bg-cover rounded-lg shadow-md">
                                 <h2 className="mt-4 text-xl font-semibold text-white capitalize">{shoes.name}</h2>
 
-                                        {/* see details modal start  */}
-                                        <div className="my-2">
-                                            <div className="">
-                                                <button onClick={() => window[`my_modal_details_${shoes._id}`].showModal()} className="text-sm">
-                                                <p className="mt-2 text-lg tracking-wider text-[#67f37c] ">See Details...</p>
-                                                </button>
-                                            </div>
-                                            <dialog id={`my_modal_details_${shoes._id}`} className="modal">
-                                                <div className="modal-box p-0 md:p-6">
-                                                    <form method="dialog">
-                                                        <button className="btn btn-sm bg-gray-100 btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                                    </form>
-                                                    <ShoesDetailsModal id={shoes._id} ></ShoesDetailsModal>
-                                                </div>
-                                            </dialog>
+                                {/* see details modal  */}
+                                <div className="my-2">
+                                    <div className="">
+                                        <button onClick={() => window[`my_modal_details_${shoes._id}`].showModal()} className="text-sm">
+                                            <p className="mt-2 text-lg tracking-wider text-[#67f37c] ">See Details...</p>
+                                        </button>
+                                    </div>
+                                    <dialog id={`my_modal_details_${shoes._id}`} className="modal">
+                                        <div className="modal-box p-0 md:p-6">
+                                            <form method="dialog">
+                                                <button className="btn btn-sm bg-gray-100 btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                            </form>
+                                                <ShoesDetailsModal id={shoes._id} ></ShoesDetailsModal>
                                         </div>
+                                    </dialog>
+                                </div>
 
 
 
@@ -132,9 +133,28 @@ const Shop = () => {
                             <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
                             <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
                                 <span className="font-bold">${shoes.price}</span>
-                                <button className="btn btn-sm border-none px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
+                                {/* <button className="btn btn-sm border-none px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
                                     <Link to={`/shoes-order/${shoes._id}`}>Buy</Link>
-                                </button>
+                                </button> */}
+
+                                {/* order modal  */}
+                                <div className="">
+                                    <div className="">
+                                        <button onClick={() => window[`my_modal_${shoes._id}`].showModal()} className="btn btn-sm border-none px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
+                                            <span>Order</span>
+                                        </button>
+                                    </div>
+                                    <dialog id={`my_modal_${shoes._id}`} className="modal">
+                                        <div className="modal-box">
+                                            <form method="dialog">
+                                                <button className="btn btn-sm bg-gray-100 btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                            </form>
+                                            <PrivetRoute>
+                                                <ShoesOrderModal id={shoes._id}></ShoesOrderModal>
+                                            </PrivetRoute>
+                                        </div>
+                                    </dialog>
+                                </div>
                             </div>
                         </div>
                     </div>)
