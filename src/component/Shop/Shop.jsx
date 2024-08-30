@@ -5,6 +5,7 @@ import "../../style.css"
 import { Link } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { useState } from "react";
+import ShoesDetailsModal from "../ShoesDetailsModal/ShoesDetailsModal";
 const Shop = () => {
     const [search, setSearch] = useState("")
     const [sortOption, setSortOption] = useState("");
@@ -73,11 +74,11 @@ const Shop = () => {
                         <option value="priceHighLow">Product Price: High to Low</option>
                     </select>
                     <select value={selectedBrand} onChange={handleBrandChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
-                    <option value="" disabled selected>All Brands</option>
-                    {uniqueBrands.map((brand, index) =>
-                        <option key={index} value={brand}>{brand}</option>
-                    )}
-                </select>
+                        <option value="" disabled selected>All Brands</option>
+                        {uniqueBrands.map((brand, index) =>
+                            <option key={index} value={brand}>{brand}</option>
+                        )}
+                    </select>
                 </div>
             </div>
 
@@ -99,7 +100,34 @@ const Shop = () => {
             <div className="mb-24 w-[95%] md:w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 {
                     sortedproducts.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
-                        <div className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" style={{ backgroundImage: `url(${shoes.image})` }}></div>
+                        <div className="overflow-hidden bg-cover bg-center rounded-lg cursor-pointer w-full h-64 group"
+                            style={{ backgroundImage: `url(${shoes.image})` }}>
+                            <div
+                                className="flex flex-col justify-center w-full h-full px-8 py-4 transition-opacity duration-700 opacity-0 backdrop-blur-sm bg-gray-800/60 group-hover:opacity-100 bg-gray-300 bg-center bg-cover rounded-lg shadow-md">
+                                <h2 className="mt-4 text-xl font-semibold text-white capitalize">{shoes.name}</h2>
+
+                                        {/* see details modal start  */}
+                                        <div className="my-2">
+                                            <div className="">
+                                                <button onClick={() => window[`my_modal_details_${shoes._id}`].showModal()} className="text-sm">
+                                                <p className="mt-2 text-lg tracking-wider text-[#67f37c] ">See Details...</p>
+                                                </button>
+                                            </div>
+                                            <dialog id={`my_modal_details_${shoes._id}`} className="modal">
+                                                <div className="modal-box p-0 md:p-6">
+                                                    <form method="dialog">
+                                                        <button className="btn btn-sm bg-gray-100 btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                                    </form>
+                                                    <ShoesDetailsModal id={shoes._id} ></ShoesDetailsModal>
+                                                </div>
+                                            </dialog>
+                                        </div>
+
+
+
+                            </div>
+                        </div>
+
                         <div className="w-56 -mt-10 overflow-hidden rounded-lg shadow-lg md:w-64 bg-white">
                             <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
                             <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
