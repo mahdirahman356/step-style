@@ -7,11 +7,13 @@ import { MdSearch } from "react-icons/md";
 import { useState } from "react";
 const Shop = () => {
     const [search, setSearch] = useState("")
+    const [sortOption, setSortOption] = useState("");
+    const [selectedBrand, setSelectedBrand] = useState("");
     const axiosCommon = useAxiosCommon()
-    const { data: Allshoes = [] } = useQuery({
-        queryKey: ["Allshoes", search],
+    const { data: Allshoes = [], refetch } = useQuery({
+        queryKey: ["Allshoes", search, selectedBrand],
         queryFn: async () => {
-            const res = await axiosCommon.get(`/shoes?search=${search}`)
+            const res = await axiosCommon.get(`/shoes?search=${search}&brand=${selectedBrand}`)
             console.log(res.data)
             return res.data
         }
@@ -24,6 +26,34 @@ const Shop = () => {
 
     }
 
+    const handleSortChange = (e) => {
+        setSortOption(e.target.value);
+    };
+
+    const handleBrandChange = (e) => {
+        setSelectedBrand(e.target.value);
+        console.log(e.target.value)
+        refetch();
+    };
+
+    const sortproducts = (Allshoes, option) => {
+        switch (option) {
+            case "priceLowHigh":
+                return [...Allshoes].sort((a, b) => a.price - b.price)
+            case "priceHighLow":
+                return [...Allshoes].sort((a, b) => b.price - a.price)
+            default:
+                return Allshoes
+        }
+    };
+
+    const sortedproducts = sortproducts(Allshoes, sortOption);
+
+
+    const uniqueBrands = [...new Set(Allshoes.map(product => product.brand))];
+
+
+
     return (
         <div>
             <div className="pt-14">
@@ -32,21 +62,22 @@ const Shop = () => {
                     <form onSubmit={handleSearch} className="flex w-full">
                         <input type="text" name="search" placeholder="Search here" className="input rounded-sm input-bordered w-full" />
                         <button className="btn bg-[#677D6A] text-white rounded-sm">
-                            <MdSearch className="text-xl"/>
+                            <MdSearch className="text-xl" />
                             Search
                         </button>
                     </form>
 
-                    <select className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
-                        <option disabled selected>Who shot first?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
+                    <select value={sortOption} onChange={handleSortChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
+                        <option value="" disabled selected>Shot By Price </option>
+                        <option value="priceLowHigh">Product Price: Low to High</option>
+                        <option value="priceHighLow">Product Price: High to Low</option>
                     </select>
-                    <select className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
-                        <option disabled selected>Who shot first?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
+                    <select value={selectedBrand} onChange={handleBrandChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
+                    <option value="" disabled selected>All Brands</option>
+                    {uniqueBrands.map((brand, index) =>
+                        <option key={index} value={brand}>{brand}</option>
+                    )}
+                </select>
                 </div>
             </div>
 
@@ -67,7 +98,7 @@ const Shop = () => {
 
             <div className="mb-24 w-[95%] md:w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 {
-                    Allshoes.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+                    sortedproducts.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
                         <div className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" style={{ backgroundImage: `url(${shoes.image})` }}></div>
                         <div className="w-56 -mt-10 overflow-hidden rounded-lg shadow-lg md:w-64 bg-white">
                             <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
@@ -81,7 +112,7 @@ const Shop = () => {
                     </div>)
                 }
             </div>
-            </div>
+        </div>
 
     );
 };

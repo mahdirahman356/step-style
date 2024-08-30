@@ -18,11 +18,11 @@ const Navbar = () => {
       })
   }
 
-  let hideNavbaerAndFooter = location.pathname.includes('/shop')
+  let hideNavbaer = location.pathname.includes('/shop')
 
-   console.log(hideNavbaerAndFooter)
+   console.log(hideNavbaer)
   return (
-    <div className={`relative z-10 w-full bg-transparent bg-black ${hideNavbaerAndFooter ? "text-black" : "text-white"}`}>
+    <div className={`relative z-10 w-full bg-transparent bg-black ${hideNavbaer ? "text-black" : "text-white"}`}>
       <div className="navbar absolute	w-[95%] md:w-[85%] mx-auto"  style={{ left: "50%", transform: "translateX(-50%)" }} >
         <div className="navbar-start">
           <div className="dropdown">
