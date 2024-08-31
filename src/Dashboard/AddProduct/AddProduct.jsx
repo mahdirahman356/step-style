@@ -43,9 +43,6 @@ const AddProduct = () => {
         } catch (err) {
             console.log(err);
         }
-        finally {
-            setLoading(false);
-        }
         console.log(name, price, description, brand, category, selectedColor, selectedSize, productImage)
 
         const product = {
@@ -78,6 +75,9 @@ const AddProduct = () => {
 
         } catch (error) {
             console.error('Error adding product:', error);
+        }
+        finally {
+            setLoading(false);
         }
 
     }
