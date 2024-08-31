@@ -3,6 +3,8 @@ import Select from 'react-select'
 import { imageUplode } from '../../imageAPI';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import uplosdImage from "../../assets/image/upload-icon-30.png"
+import { useNavigate } from 'react-router-dom';
 
 
 const AddProduct = () => {
@@ -10,11 +12,15 @@ const AddProduct = () => {
     const [selectedColor, setSelectedColor] = useState([])
     const [selectedSize, setSelectedSize] = useState([])
     const [productImage, setProductImage] = useState(null)
+    const [selectedImage, setSelectedImage] = useState(null)
+    const [loading, setLoading] = useState(false)
 
+    const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
 
-    const handleAddProduct = async(e) => {
+    const handleAddProduct = async (e) => {
         e.preventDefault()
+        setLoading(true)
         const from = e.target
         const name = from.name.value
         const price = from.price.value
@@ -37,7 +43,10 @@ const AddProduct = () => {
         } catch (err) {
             console.log(err);
         }
-        console.log(name, price, description, brand, category,  selectedColor, selectedSize, productImage)
+        finally {
+            setLoading(false);
+        }
+        console.log(name, price, description, brand, category, selectedColor, selectedSize, productImage)
 
         const product = {
             name: name,
@@ -53,17 +62,24 @@ const AddProduct = () => {
         }
         console.log(product)
 
-     const res = await   axiosSecure.post("/shoes", product) 
-     console.log(res.data)  
-     if(res.data.acknowledged) {
-        Swal.fire({
-            title: 'Success',
-            text: 'Your product has been successfully added',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        })
-     }
-    
+        try {
+
+            const res = await axiosSecure.post("/shoes", product)
+            console.log(res.data)
+            if (res.data.acknowledged) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Your product has been successfully added',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                navigate("/dashboard/all-product")
+            }
+
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
+
     }
 
 
@@ -78,8 +94,15 @@ const AddProduct = () => {
     }
 
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            setSelectedImage(URL.createObjectURL(file))
+        }
+    }
 
-   const color = [
+
+    const color = [
         { value: 'black', label: 'Black' },
         { value: 'white', label: 'White' },
         { value: 'red', label: 'Red' },
@@ -110,15 +133,17 @@ const AddProduct = () => {
         { value: '11', label: '11' },
     ]
 
+
     const customStyles = {
         control: (provided) => ({
             ...provided,
-            borderRadius: '1.5rem',
+            borderRadius: '0',
             padding: '4px',
-            borderColor: '#ccc',
+            borderColor: 'transparent',
+            borderBottom: '2px solid #ccc',
             boxShadow: 'none',
             '&:hover': {
-                borderColor: '#888',
+                borderBottom: '2px solid #888',
             },
         }),
         multiValue: (provided) => ({
@@ -131,41 +156,84 @@ const AddProduct = () => {
         }),
     };
 
-
     return (
-        <div className="w-[95%] mx-auto">
+        <div className="w-[80%] mx-auto">
             <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Add Product</h2>
             <form onSubmit={handleAddProduct}>
-                <div className="grid md:grid-cols-2 gap-8 mb-6">
-                    <input type="text" placeholder="Product Name" name="name" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Product Price" name="price" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Description" name="description" className="input input-bordered rounded-3xl rou w-full" />
-                    <input type="text" placeholder="Brand" name="brand" className="input input-bordered rounded-3xl rou w-full" />
+                <div className="flex flex-col-reverse md:flex-row justify-between mb-6 mt-20 gap-24">
 
-                    <Select name='category' styles={customStyles} placeholder="Select category" options={category} />
+                    <div>
+                        <div className='flex justify-start mb-6'>
+                            <div>
+                                <label htmlFor="file" className="block text-sm text-gray-500">Product Image</label>
 
-                    <Select name='colour' onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={color} />
+                                <label htmlFor="dropzone-file" className="flex flex-col items-center w-full max-w-lg p-5 mx-auto mt-2 text-center bg-white border-2 border-gray-300 border-dashed cursor-pointer rounded-xl">
 
-                    <Select name='size' onChange={handleSize} styles={customStyles} placeholder="Select Size" isMulti={true} options={size} />
+
+                                    <img className='w-64 h-52 object-cover rounded-md' src={selectedImage ? selectedImage : uplosdImage} alt="" />
+
+                                    <input
+                                        id="dropzone-file"
+                                        type="file"
+                                        className="hidden"
+                                        name="image"
+                                        accept="image/*"
+                                        onChange={handleImageChange} />
+                                </label>
+                            </div>
+                        </div>
+                        <div className='space-y-6'>
+                            <Select name='category' styles={customStyles} placeholder="Select category" options={category} />
+
+                            <Select name='colour' onChange={handleChange} styles={customStyles} placeholder="Select colour" isMulti={true} options={color} />
+
+                            <Select name='size' onChange={handleSize} styles={customStyles} placeholder="Select Size" isMulti={true} options={size} />
+                        </div>
+                    </div>
+
+
+                    <div className='md:w-1/2 flex flex-col gap-y-14 md:gap-0 justify-between mt-6'>
+                        <div>
+                            <input type="text"
+                                placeholder="Product Name"
+                                name="name"
+                                className='grow w-full pl-4 border-b-2 border-gray-300 pb-1 focus:border-blue-500 outline-none rounded-none'
+                            />
+
+                        </div>
+
+                        <div>
+                            <input type="text"
+                                placeholder="Product Price"
+                                name="price"
+                                className='grow w-full pl-4 border-b-2 border-gray-300 pb-1 focus:border-blue-500 outline-none rounded-none'
+                            />
+
+                        </div>
+
+                        <div>
+                            <input type="text"
+                                placeholder="Description"
+                                name="description"
+                                className='grow w-full pl-4 border-b-2 border-gray-300 pb-1 focus:border-blue-500 outline-none rounded-none'
+                            />
+
+                        </div>
+
+                        <div>
+                            <input type="text"
+                                placeholder="Brand"
+                                name="brand"
+                                className='grow pl-4 w-full border-b-2 border-gray-300 pb-1 focus:border-blue-500 outline-none rounded-none'
+                            />
+                        </div>
+                    </div>
 
 
                 </div>
-
-                  
-                <p className="mt-3 text-gray-500 mb-1 text-sm ml-2">Product Image</p>
-                <label htmlFor="image" className=" flex md:w-1/2 mb-5 items-center justify-center px-3 py-3  text-center bg-white border-2 border-dashed rounded-lg cursor-pointer ">
-                    <div className=''>
-                    <input
-                        type="file"
-                        name="image"
-                        className="file-input h-36 bg-[#1A2130] border-none text-white w-full max-w-xs"
-                        accept="image/*"
-                    />
-                    </div>
-                </label>
-
-                <button className="btn w-64 mb-5 rounded-3xl bg-[#1A2130] text-white">
-                    Continue
+                <button className="btn my-12 w-64 mb-5 rounded-md bg-[#677D6A] text-white">
+                    {loading ? <span className="loading loading-spinner loading-md"></span>
+                        : "Continue"}
                 </button>
             </form>
         </div>

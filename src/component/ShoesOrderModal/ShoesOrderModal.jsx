@@ -11,6 +11,7 @@ const ShoesOrderModal = ({ id }) => {
 
     const { user } = useContext(AuthContext)
     const [TheUser, SetTheUser] = useState([])
+    const [loading, setLoading] = useState(false)
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
     console.log(id)
@@ -38,6 +39,7 @@ const ShoesOrderModal = ({ id }) => {
 
     const handleOrder = async (e) => {
         e.preventDefault();
+        setLoading(true)
         let form = e.target;
         let userName = form.userName.value;
         let email = form.email.value;
@@ -77,6 +79,9 @@ const ShoesOrderModal = ({ id }) => {
 
         } catch (error) {
             console.log(error)
+        }
+        finally{
+            setLoading(false)
         }
 
     }
@@ -163,7 +168,7 @@ const ShoesOrderModal = ({ id }) => {
                 </div>
 
                 <button className="btn w-full rounded-3xl bg-[#677D6A] text-white">
-                    order
+                    {loading ? <span className="loading loading-spinner loading-md"></span> : "order"}
                 </button>
             </form>
         </div>

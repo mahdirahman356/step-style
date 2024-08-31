@@ -133,9 +133,6 @@ const Shop = () => {
                             <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
                             <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
                                 <span className="font-bold">${shoes.price}</span>
-                                {/* <button className="btn btn-sm border-none px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none">
-                                    <Link to={`/shoes-order/${shoes._id}`}>Buy</Link>
-                                </button> */}
 
                                 {/* order modal  */}
                                 <div className="">
