@@ -30,13 +30,13 @@ const Profile = () => {
 
             < div className="flex">
                 {
-                    TheUser.map((user, index) => <div key={index} className="p-8 sm:flex sm:space-x-6">
+                    TheUser.map((TheUser, index) => <div key={index} className="p-8 sm:flex sm:space-x-6">
                         <div className="w-36 h-36 mb-3">
-                            <img src={user.image ? user.image : profile} alt="" className="object-cover object-center w-full h-full rounded-full dark:bg-gray-500" />
+                            <img src={TheUser.image || user.photoURL ? TheUser.image || user.photoURL : profile} alt="" className="object-cover object-center w-full h-full rounded-full dark:bg-gray-500" />
                         </div>
                         <div className=" sm:flex sm:space-x-6">
                             <div className="mb-6">
-                                <h2 className="text-2xl font-semibold">{user.name}</h2>
+                                <h2 className="text-2xl font-semibold">{TheUser.name}</h2>
                                 <span className="text-sm dark:text-gray-600">General manager</span>
                                 <button className="btn rounded-full bg-[#677D6A] text-white mt-3 flex" onClick={() => document.getElementById('my_modal_3').showModal()}><FiEdit3 className="text-[17px]" /></button>
                                 <dialog id="my_modal_3" className="modal">
@@ -45,14 +45,14 @@ const Profile = () => {
                                             {/* if there is a button in form, it will close the modal */}
                                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black">✕</button>
                                         </form>
-                                        <UpdateProfile id={user._id} location={user.location} contactNumber={user.contactNumber} refetch={refetch}></UpdateProfile>
+                                        <UpdateProfile id={TheUser._id} location={TheUser.location} contactNumber={TheUser.contactNumber} image={TheUser.image} refetch={refetch}></UpdateProfile>
                                     </div>
                                 </dialog>
                             </div>
                             <div className="">
-                                <p className="mb-2 text-sm flex items-center gap-2"><IoMailOutline className="text-xl" />{user?.email}</p>
-                                <p className="mb-2 text-sm flex items-center gap-2"><IoLocationOutline className="text-xl" />{user.location ? user.location : "Add your location"}</p>
-                                <p className="mb-2 text-sm flex items-center gap-2"><IoCallOutline className="text-xl" />{user.contactNumber ? user.contactNumber : "Add your contact number"}</p>
+                                <p className="mb-2 text-sm flex items-center gap-2"><IoMailOutline className="text-xl" />{TheUser?.email}</p>
+                                <p className="mb-2 text-sm flex items-center gap-2"><IoLocationOutline className="text-xl" />{TheUser.location ? TheUser.location : "Add your location"}</p>
+                                <p className="mb-2 text-sm flex items-center gap-2"><IoCallOutline className="text-xl" />{TheUser.contactNumber ? TheUser.contactNumber : "Add your contact number"}</p>
                             </div>
                         </div>
                     </div>)

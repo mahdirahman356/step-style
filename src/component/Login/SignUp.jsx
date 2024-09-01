@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import GoogleLogin from "../../SocialLogin/GoogleLogin";
+import { IoMdReturnLeft } from "react-icons/io";
 
 const SignUp = () => {
 
@@ -63,25 +65,21 @@ const SignUp = () => {
 
     }
     return (
-        <div className="w-full nunito">
-            <div className="m-0 p-0  w-full flex flex-col-reverse lg:flex-row-reverse justify-between">
+        <div className="w-[90%] md:w-full mx-auto nunito">
+            <div className="m-0 p-0  w-full flex lg:flex-row-reverse lg:justify-between">
 
-                <div className="hero h-screen shadow-2xl lg:w-[40%]" style={{ backgroundImage: `url(${iamge})` }}>
+                <div className="hero min-h-screen shadow-2xl lg:w-[40%] hidden lg:grid" style={{ backgroundImage: `url(${iamge})` }}>
                     <div className="hero-overlay bg-opacity-60"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="max-w-md">
                             <h1 className="mb-5 text-4xl font-semibold" >Create Your StepStyle Account</h1>
                             <p className="mb-5">Join StepStyle and unlock exclusive benefits! Sign up now to enjoy personalized recommendations, special offers, and a seamless shopping experience. Step into style with us!</p>
-                            <button className="btn text-white border-none bg-[#1A2130] rounded-3xl w-44 mr-3">
-                                <Link to='/'>Go Home</Link>
-                            </button>
-                            <button className="btn text-white border-none bg-[#1A2130] rounded-3xl w-44">
-                                <Link to='/login'>Login</Link>
-                            </button>
+                            <p className="text-xl mb-5 "><Link to="/" className="flex justify-center items-center gap-3"><IoMdReturnLeft className="text-white"/>Go Home</Link></p>
+
                         </div>
                     </div>
                 </div>
-                <div className="w-full flex flex-col justify-center items-center">
+                <div className="w-full flex flex-col justify-center items-center my-14 md:md-0">
                     <h1 className="text-3xl md:text-5xl font-semibold mt-5">Sign Up</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-[95%] md:w-[50%] mx-auto space-y-4 mt-12 mb-4">
                         <label className="input rounded-3xl input-bordered flex items-center gap-2">
@@ -119,6 +117,9 @@ const SignUp = () => {
                         </button>
                     </form>
                     <p className="text-center">___________or___________</p>
+                    <GoogleLogin></GoogleLogin>
+                    <p className="mt-4 text-sm">Already have an account please <span className="text-blue-500 underline"><Link to="/login">Login</Link></span></p>
+                    <p></p>
                 </div>
             </div>
         </div>

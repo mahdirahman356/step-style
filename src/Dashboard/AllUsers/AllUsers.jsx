@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-
+import profileImage from "../../assets/image/user.avif"
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure()
@@ -34,7 +34,7 @@ const AllUsers = () => {
                         {/* row */}
                         {users.map((user, index) => <tr key={index} className="hover font-semibold text-xs whitespace-nowrap">
                             <td>
-                                <img className="object-cover w-14 h-14 rounded-full" src={user.image} alt="" />
+                                <img className="object-cover w-14 h-14 rounded-full border" src={user.image ? user.image : profileImage} alt="" />
                             </td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>

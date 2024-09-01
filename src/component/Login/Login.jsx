@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/Context";
 import Swal from "sweetalert2";
+import GoogleLogin from "../../SocialLogin/GoogleLogin";
+import { IoMdReturnLeft } from "react-icons/io";
 const Login = () => {
     let [loading, setLoading] = useState(false);
     let navigate = useNavigate();
@@ -45,25 +47,20 @@ const Login = () => {
 
 
     return (
-        <div className="w-full nunito">
-            <div className="m-0 p-0  w-full flex flex-col-reverse lg:flex-row justify-between">
+        <div className="nunito w-[90%] md:w-full mx-auto">
+            <div className="m-0 p-0  w-full flex lg:flex-row lg:justify-between">
 
-                <div className="hero h-screen shadow-2xl lg:w-[40%]" style={{ backgroundImage: `url(${iamge})` }}>
+                <div className="hero min-h-screen shadow-2xl lg:w-[40%] hidden lg:grid" style={{ backgroundImage: `url(${iamge})` }}>
                     <div className="hero-overlay bg-opacity-60"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="max-w-md">
                             <h1 className="mb-5 text-4xl font-semibold" >New Here? Join StepStyle Today!</h1>
                             <p className="mb-5">Welcome to StepStyle! Enjoy exclusive deals, personalized recommendations, and effortless shopping. Sign up now and step into style!</p>
-                            <button className="btn text-white border-none bg-[#1A2130] rounded-3xl w-44 mr-3">
-                                <Link to='/'>Go Home</Link>
-                            </button>
-                            <button className="btn text-white border-none bg-[#1A2130] rounded-3xl w-44">
-                                <Link to='/sign-up'>Sing Up</Link>
-                            </button>
+                            <p className="text-xl mb-5 "><Link to="/" className="flex justify-center items-center gap-3"><IoMdReturnLeft className="text-white"/>Go Home</Link></p>
                         </div>
                     </div>
                 </div>
-                <div className="w-full flex flex-col justify-center items-center">
+                <div className="w-full flex flex-col justify-center items-center my-14 md:md-0">
                     <h1 className="text-3xl md:text-5xl font-semibold mt-5">Login</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-[95%] md:w-[50%] mx-auto space-y-4 mt-12 mb-4">
                         <label className="input rounded-3xl input-bordered flex items-center gap-2">
@@ -92,6 +89,8 @@ const Login = () => {
                         </button>
                     </form>
                     <p className="text-center">___________or___________</p>
+                    <GoogleLogin></GoogleLogin>
+                    <p className="mt-4 text-sm">Do not have an account please <span className="text-blue-500 underline"><Link to="/sign-up">sign up</Link></span></p>
                 </div>
             </div>
         </div>
