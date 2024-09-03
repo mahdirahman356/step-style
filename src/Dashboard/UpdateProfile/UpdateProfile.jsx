@@ -84,7 +84,7 @@ const UpdateProfile = ({ id, location, contactNumber, image, refetch }) => {
         <div>
             <form onSubmit={handleUpdateProfile} className="w-full max-w-md text-gray-500">
                 <div className="flex items-center justify-center mt-6 mb-7">
-                    <a className="w-1/3 pb-4 font-medium text-center border-b-2 dark:border-blue-400">
+                    <a className="w-1/3 pb-4 font-medium text-center border-b-2 dark:border-[#677D6A]">
                         Edit Profile
                     </a>
                 </div>

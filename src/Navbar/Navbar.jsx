@@ -5,8 +5,11 @@ import { AuthContext } from "../Context/Context";
 import { VscSignOut } from "react-icons/vsc";
 import "../style.css"
 import { PiShoppingCartLight } from "react-icons/pi";
+import useOrders from "../Hooks/useOrders";
 const Navbar = () => {
   const { user, userLogOut } = useContext(AuthContext)
+
+  const [order] = useOrders()
 
   const handleSignOut = () => {
     userLogOut()
@@ -18,12 +21,12 @@ const Navbar = () => {
       })
   }
 
-  let hideNavbaer = location.pathname.includes('/shop')
+  let changeNavbarColor = location.pathname.includes('/shop')
 
-   console.log(hideNavbaer)
+  console.log(changeNavbarColor)
   return (
-    <div className={`relative z-10 w-full bg-transparent bg-black ${hideNavbaer ? "text-black" : "text-white"}`}>
-      <div className="navbar absolute	w-[95%] md:w-[85%] mx-auto"  style={{ left: "50%", transform: "translateX(-50%)" }} >
+    <div className={`relative z-10 w-full bg-transparent bg-black ${changeNavbarColor ? "text-black" : "text-white"}`}>
+      <div className="navbar absolute	w-[95%] md:w-[85%] mx-auto" style={{ left: "50%", transform: "translateX(-50%)" }} >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost p-0 pr-2 lg:hidden">
@@ -53,7 +56,12 @@ const Navbar = () => {
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/shop'>Shop</NavLink>
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
-            <NavLink>{user && <PiShoppingCartLight className="text-2xl text-white" />}</NavLink>
+            <NavLink>{user &&
+              <div className="flex flex-col">
+                  <span className="text-xs bg-[#677D6A] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
+                <PiShoppingCartLight className={`text-2xl ${changeNavbarColor ? "text-black" : "text-white"}`} />
+              </div>}
+            </NavLink>
           </ul>
           {
             user &&
