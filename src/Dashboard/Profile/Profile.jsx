@@ -8,23 +8,39 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import "../../style.css"
 import { FiEdit3 } from "react-icons/fi";
 import { LuListOrdered } from "react-icons/lu";
-import { PiPaypalLogoBold } from "react-icons/pi";
+import { PiPaypalLogoBold, PiTruck, PiUsersThreeBold } from "react-icons/pi";
 import { TbStars } from "react-icons/tb";
 import useOrders from "../../Hooks/useOrders";
 import usePayments from "../../Hooks/usePayments";
+import useAdmin from "../../Hooks/useAdmin"
+import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { AiOutlineProduct } from "react-icons/ai";
 const Profile = () => {
     const { user } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
     const [order] = useOrders()
+    const [isAdmin] = useAdmin()
     const [paymentHistory] = usePayments()
     const { data: TheUser = [], refetch } = useQuery({
         queryKey: ["TheUser"],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/users/email/${user.email}`)
+            const { data } = await axiosSecure.get(`/users/email/${user.email}`)
+            return data
+        }
+    })
+
+    const { data: adminStats = [] } = useQuery({
+        queryKey: ["adminStats"],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/admin-stats`)
             console.log(data)
             return data
         }
     })
+    
+
+
+
     return (
         <div className="w-[95%] mx-auto my-12 md:my-28 nunito">
 
@@ -58,31 +74,68 @@ const Profile = () => {
                     </div>)
                 }
             </div>
+
+
+
+            {isAdmin ?
             <div className="stats shadow flex justify-between">
-               <div className="flex justify-center items-center text-[#677D6A]">
-               <LuListOrdered className="text-8xl ml-3"/>
-                <div className="stat place-items-center">
-                    <div className="stat-title">Orders</div>
-                    <div className="stat-value">{order.length}</div>
-                </div>
-               </div>
-
-               <div className="flex justify-center items-center text-[#677D6A]">
-               <PiPaypalLogoBold className="text-8xl ml-3"/>
-                <div className="stat place-items-center">
-                    <div className="stat-title">Payments</div>
-                    <div className="stat-value">{paymentHistory.length}</div>
-                </div>
-               </div>
-
-               <div className="flex justify-center items-center text-[#677D6A]">
-               <TbStars className="text-8xl ml-3"/>
-                <div className="stat place-items-center">
-                    <div className="stat-title">Reviews</div>
-                    <div className="stat-value">31K</div>
-                </div>
-               </div>
+            <div className="flex justify-center items-center text-[#677D6A]">
+            <FaRegMoneyBillAlt className="text-8xl ml-3"/>
+             <div className="stat place-items-center">
+                 <div className="stat-title">Revenue</div>
+                 <div className="stat-value">{adminStats.revenue}$</div>
+             </div>
             </div>
+
+            <div className="flex justify-center items-center text-[#677D6A]">
+            <PiUsersThreeBold className="text-8xl ml-3"/>
+             <div className="stat place-items-center">
+                 <div className="stat-title">Customers</div>
+                 <div className="stat-value">{adminStats.users}</div>
+             </div>
+            </div>
+
+            <div className="flex justify-center items-center text-[#677D6A]">
+            <AiOutlineProduct className="text-8xl ml-3"/>
+             <div className="stat place-items-center">
+                 <div className="stat-title">Products</div>
+                 <div className="stat-value">{adminStats.products}</div>
+             </div>
+            </div>
+
+            <div className="flex justify-center items-center text-[#677D6A]">
+            <PiTruck className="text-8xl ml-3"/>
+             <div className="stat place-items-center">
+                 <div className="stat-title">Orders</div>
+                 <div className="stat-value">{adminStats.orders}</div>
+             </div>
+            </div>
+         </div> : 
+         <div className="stats shadow flex justify-between">
+         <div className="flex justify-center items-center text-[#677D6A]">
+         <LuListOrdered className="text-8xl ml-3"/>
+          <div className="stat place-items-center">
+              <div className="stat-title">Orders</div>
+              <div className="stat-value">{order.length}</div>
+          </div>
+         </div>
+
+         <div className="flex justify-center items-center text-[#677D6A]">
+         <PiPaypalLogoBold className="text-8xl ml-3"/>
+          <div className="stat place-items-center">
+              <div className="stat-title">Payments</div>
+              <div className="stat-value">{paymentHistory.length}</div>
+          </div>
+         </div>
+
+         <div className="flex justify-center items-center text-[#677D6A]">
+         <TbStars className="text-8xl ml-3"/>
+          <div className="stat place-items-center">
+              <div className="stat-title">Reviews</div>
+              <div className="stat-value">31K</div>
+          </div>
+         </div>
+      </div>}
         </div>
     );
 };

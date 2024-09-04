@@ -14,13 +14,11 @@ const ShoesOrderModal = ({ id }) => {
     const [loading, setLoading] = useState(false)
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    console.log(id)
 
     const { data: shoes = [] } = useQuery({
         queryKey: ["shoes", id],
         queryFn: async () => {
             const res = await axiosSecure.get(`/shoes-details/${id}`)
-            console.log(res.data)
             return res.data
         }
     })
@@ -32,7 +30,6 @@ const ShoesOrderModal = ({ id }) => {
     useEffect(() => {
         axiosSecure.get(`/users/email/${user.email}`)
             .then(res => {
-                console.log(res.data[0])
                 SetTheUser(res.data[0])
             })
     }, [user.email, axiosSecure])
@@ -63,10 +60,8 @@ const ShoesOrderModal = ({ id }) => {
             confirmation: "Pending",
             isPaid: false
         }
-        console.log(order)
         try {
             const res = await axiosSecure.post('/order', order)
-            console.log(res.data)
             if (res.data.acknowledged) {
                 Swal.fire({
                     title: 'Success',

@@ -18,6 +18,7 @@ import ProductUpdate from "../Dashboard/ProductUpdate/ProductUpdate";
 import Payment from "../Dashboard/Dashboard/Payment/Payment";
 import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
 import AllUsers from "../Dashboard/AllUsers/AllUsers";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -66,38 +67,38 @@ export const router = createBrowserRouter([
             },
             {
                 path: "all-orders",
-                element: <PrivetRoute><AllOrders></AllOrders></PrivetRoute>
+                element: <AdminRoute><AllOrders></AllOrders></AdminRoute>
             },
             {
                 path: "/dashboard/all-orders/order-details/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/order/${params.id}`),
-                element: <PrivetRoute><OrderDetails></OrderDetails></PrivetRoute>
+                element: <AdminRoute><OrderDetails></OrderDetails></AdminRoute>
             },
             {
                 path: "add-product",
-                element:<AddProduct></AddProduct>
+                element:<AdminRoute><AddProduct></AddProduct></AdminRoute>
             },
             {
                 path: "all-product",
-                element:<AllProduct></AllProduct>
+                element:<AdminRoute><AllProduct></AllProduct></AdminRoute>
             },
             {
                 path: "all-users",
-                element:<AllUsers></AllUsers>
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: "/dashboard/all-Product/shoes-details/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
-                element:<ShoesDetails></ShoesDetails>
+                element:<AdminRoute><ShoesDetails></ShoesDetails></AdminRoute>
             },
             {
                 path: "/dashboard/all-Product/product-update/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
-                element:<ProductUpdate></ProductUpdate>
+                element:<AdminRoute><ProductUpdate></ProductUpdate></AdminRoute>
             },
             {
                 path: "payment-history",
-                element:<PaymentHistory></PaymentHistory>
+                element:<PrivetRoute><PaymentHistory></PaymentHistory></PrivetRoute>
             }
         ]
     }

@@ -6,10 +6,12 @@ import { VscSignOut } from "react-icons/vsc";
 import "../style.css"
 import { PiShoppingCartLight } from "react-icons/pi";
 import useOrders from "../Hooks/useOrders";
+import useAdmin from "../Hooks/useAdmin";
 const Navbar = () => {
   const { user, userLogOut } = useContext(AuthContext)
 
   const [order] = useOrders()
+  const [isAdmin] = useAdmin()
 
   const handleSignOut = () => {
     userLogOut()
@@ -57,7 +59,7 @@ const Navbar = () => {
             <NavLink to='/shop'>Shop</NavLink>
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
             <NavLink>{user &&
-              <div className="flex flex-col">
+              <div className={`flex flex-col ${isAdmin && "hidden"}`}>
                   <span className="text-xs bg-[#677D6A] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
                 <PiShoppingCartLight className={`text-2xl ${changeNavbarColor ? "text-black" : "text-white"}`} />
               </div>}
