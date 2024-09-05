@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/shoes-order/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
+                loader: ({params}) => fetch(`https://step-style-server.vercel.app/shoes-details/${params.id}`),
                 element:<PrivetRoute><ShoesOrder></ShoesOrder></PrivetRoute>
             }
         ]
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/order/payment/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/order/${params.id}`),
+                loader: ({params}) => fetch(`https://step-style-server.vercel.app/order/${params.id}`),
                 element:<Payment></Payment>
             },
             {
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/all-orders/order-details/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/order/${params.id}`),
+                loader: ({params}) => fetch(`https://step-style-server.vercel.app/order/${params.id}`),
                 element: <AdminRoute><OrderDetails></OrderDetails></AdminRoute>
             },
             {
@@ -88,12 +88,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/all-Product/shoes-details/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
+                loader: ({params}) => fetch(`https://step-style-server.vercel.app/shoes-details/${params.id}`),
                 element:<AdminRoute><ShoesDetails></ShoesDetails></AdminRoute>
             },
             {
                 path: "/dashboard/all-Product/product-update/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/shoes-details/${params.id}`),
+                loader: ({params}) => fetch(`https://step-style-server.vercel.app/shoes-details/${params.id}`),
                 element:<AdminRoute><ProductUpdate></ProductUpdate></AdminRoute>
             },
             {
