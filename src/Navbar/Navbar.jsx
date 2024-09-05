@@ -35,15 +35,16 @@ const Navbar = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a>Item 1</a></li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li><a>Submenu 1</a></li>
-                  <li><a>Submenu 2</a></li>
-                </ul>
-              </li>
-              <li><a>Item 3</a></li>
+            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/login'>Login</NavLink>
+            <NavLink to='/shop'>Shop</NavLink>
+            <NavLink to='/dashboard/profile'>Dashboard</NavLink>
+            <NavLink>{user &&
+              <div className={`flex flex-col ${isAdmin && "hidden"}`}>
+                  <span className="text-xs bg-[#677D6A] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
+                <PiShoppingCartLight className={`text-2xl ${changeNavbarColor ? "text-black" : "text-white"}`} />
+              </div>}
+            </NavLink>
             </ul>
           </div>
           <a className=" text-xl lg:text-3xl font-semibold">
