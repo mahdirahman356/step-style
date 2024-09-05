@@ -50,47 +50,62 @@ const Orders = () => {
     return (
         <div className="w-[95%] mx-auto">
             <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">My Orders</h2>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr className="text-sm">
-                            <th></th>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Details</th>
-                            <th>Pay</th>
-                            <th>Confirmation</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row  */}
-                        {order.map((order, index) => <tr key={index} className="hover font-semibold text-xs whitespace-nowrap">
-                            <td>{index + 1}</td>
-                            <td>{order.productName}</td>
-                            <td>{order.productPrice}$</td>
-                            <td>{order.date.split("T")[0]}</td>
-                            <td><span className="text-blue-500 btn btn-sm">
-                                <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
-                            </span>
-                            </td>
-                            <td>
-                                {!order.isPaid ?
-                                    <Link to={`/dashboard/order/payment/${order._id}`}>
-                                        <span className="text-blue-500 btn btn-sm">Pay</span>
-                                    </Link>
-                                    : 
-                                   <span className="text-blue-500 btn btn-sm" disabled>Paid</span>}
+            {order.length === 0 ?
+                <div>
+                    <div className="flex flex-col items-center justify-center mt-16">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-16 h-16 text-gray-400 mb-4">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h18M3 3l3 18h12l3-18M3 3l3 18h12l3-18M3 3h18M3 3l3 18h12l3-18" />
+                        </svg>
+                        <p className="text-lg font-semibold text-gray-500">You have not placed an order yet</p>
+                        <Link to="/shop">
+                            <button className="mt-6 px-4 py-2 bg-[#677D6A] text-white rounded">
+                                Start Shopping
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+                :
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr className="text-sm">
+                                <th></th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Details</th>
+                                <th>Pay</th>
+                                <th>Confirmation</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row  */}
+                            {order.map((order, index) => <tr key={index} className="hover font-semibold text-xs whitespace-nowrap">
+                                <td>{index + 1}</td>
+                                <td>{order.productName}</td>
+                                <td>{order.productPrice}$</td>
+                                <td>{order.date.split("T")[0]}</td>
+                                <td><span className="text-blue-500 btn btn-sm">
+                                    <Link to={`/dashboard/all-Product/shoes-details/${order.productId}`}>View Details</Link>
+                                </span>
+                                </td>
+                                <td>
+                                    {!order.isPaid ?
+                                        <Link to={`/dashboard/order/payment/${order._id}`}>
+                                            <span className="text-blue-500 btn btn-sm">Pay</span>
+                                        </Link>
+                                        :
+                                        <span className="text-blue-500 btn btn-sm" disabled>Paid</span>}
 
-                            </td>
-                            <td>{order.confirmation}</td>
-                            <td><span onClick={() => handleDeleteOrder(order._id, order.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
-                        </tr>)}
-                    </tbody>
-                </table>
-            </div>
+                                </td>
+                                <td>{order.confirmation}</td>
+                                <td><span onClick={() => handleDeleteOrder(order._id, order.productName)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
+                            </tr>)}
+                        </tbody>
+                    </table>
+                </div>}
         </div>
     );
 };

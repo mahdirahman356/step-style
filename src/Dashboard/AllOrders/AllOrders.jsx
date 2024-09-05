@@ -15,13 +15,13 @@ const AllOrders = () => {
         }
     })
 
-    const handleConfirm = async(id) => {
+    const handleConfirm = async (id) => {
         console.log(id)
-        axiosSecure.patch(`/order-confirm/${id}`, {confirmation: "Confirmed"})
-        .then(res => {
-            console.log(res.data)
-            refetch()
-        })
+        axiosSecure.patch(`/order-confirm/${id}`, { confirmation: "Confirmed" })
+            .then(res => {
+                console.log(res.data)
+                refetch()
+            })
     }
 
     const handleDeleteOrder = (id, name) => {
@@ -56,7 +56,7 @@ const AllOrders = () => {
     return (
         <div className="w-[95%] mx-auto">
             <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">All Orders</h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mb-5">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -84,7 +84,12 @@ const AllOrders = () => {
                                 <span onClick={() => handleConfirm(orders._id)} className={orders.confirmation === "Confirmed" ? "text-green-500 btn btn-sm btn-ghost w-24" : "text-red-500 btn btn-sm btn-ghost w-24"}>{orders.confirmation}</span>
                                 : <span className="btn btn-sm w-24" disabled>{orders.confirmation}</span>
                             }</td>
-                            <td><span onClick={() => handleDeleteOrder(orders._id, orders.name)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span></td>
+                            <td>
+                                {orders.isPaid === true ?
+                                    <span className="btn btn-ghost " disabled><RiDeleteBinLine className="text-xl text-red-500" /></span>
+                                    : <span onClick={() => handleDeleteOrder(orders._id, orders.name)} className="btn btn-ghost"><RiDeleteBinLine className="text-xl text-red-500" /></span>
+                                }
+                            </td>
                         </tr>)}
                     </tbody>
                 </table>

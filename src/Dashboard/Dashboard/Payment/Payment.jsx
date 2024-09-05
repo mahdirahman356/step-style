@@ -6,6 +6,7 @@ import { useLoaderData } from "react-router-dom";
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Geteway_PK)
 const Payment = () => {
     const product = useLoaderData()
+    console.log(product)
     return (
         <div className="w-[95%] mx-auto">
             <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Payment</h2>
