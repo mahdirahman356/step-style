@@ -21,7 +21,7 @@ const Profile = () => {
     const [order] = useOrders()
     const [isAdmin] = useAdmin()
     const [paymentHistory] = usePayments()
-    const { data: TheUser = [], refetch } = useQuery({
+    const { data: TheUser = [], refetch, isLoading } = useQuery({
         queryKey: ["TheUser"],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/users/email/${user.email}`)
@@ -43,7 +43,13 @@ const Profile = () => {
 
     return (
         <div className="w-[95%] mx-auto py-12 lg:py-0 lg:my-28 nunito">
-            < div className="flex">
+            {isLoading ? 
+            <div className=" min-h-screen flex justify-center items-center">
+                <progress className="progress w-56"></progress>
+            </div>
+           : 
+          <div>
+             < div className="flex">
                 {
                     TheUser.map((TheUser, index) => <div key={index} className="p-8 sm:flex sm:space-x-6">
                         <div className="w-36 h-36 mb-3">
@@ -135,6 +141,7 @@ const Profile = () => {
           </div>
          </div>
       </div>}
+          </div>}
         </div>
     );
 };
