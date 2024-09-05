@@ -27,7 +27,7 @@ const PaymentHistory = () => {
                 <AiOutlineHistory className="text-6xl text-gray-400" />
                 <p className="text-lg font-semibold text-gray-500 mt-5">You have no pending payments</p>
                 <Link to="/dashboard/order">
-                    <button className="mt-6 px-4 py-2 bg-[#677D6A] text-white rounded">
+                    <button className="mt-6 px-4 py-2 bg-[#1A2130] text-white rounded">
                         View Your Orders
                     </button>
                 </Link>

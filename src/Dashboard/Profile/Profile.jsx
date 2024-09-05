@@ -59,7 +59,7 @@ const Profile = () => {
                             <div className="mb-6">
                                 <h2 className="text-2xl font-semibold">{TheUser.name}</h2>
                                 <span className="text-sm dark:text-gray-600">General manager</span>
-                                <button className="btn rounded-full bg-[#677D6A] text-white mt-3 flex" onClick={() => document.getElementById('my_modal_3').showModal()}><FiEdit3 className="text-[17px]" /></button>
+                                <button className="btn rounded-full bg-gray-700 text-white mt-3 flex" onClick={() => document.getElementById('my_modal_3').showModal()}><FiEdit3 className="text-[17px]" /></button>
                                 <dialog id="my_modal_3" className="modal">
                                     <div className="modal-box">
                                         <form method="dialog">
@@ -84,7 +84,7 @@ const Profile = () => {
 
             {isAdmin ?
             <div className="stats shadow flex justify-between">
-            <div className="flex justify-center items-center text-[#677D6A]">
+            <div className="flex justify-center items-center text-gray-700">
             <FaRegMoneyBillAlt className="text-8xl ml-3"/>
              <div className="stat place-items-center">
                  <div className="stat-title">Revenue</div>
@@ -92,7 +92,7 @@ const Profile = () => {
              </div>
             </div>
 
-            <div className="flex justify-center items-center text-[#677D6A]">
+            <div className="flex justify-center items-center text-gray-700">
             <PiUsersThreeBold className="text-8xl ml-3"/>
              <div className="stat place-items-center">
                  <div className="stat-title">Customers</div>
@@ -100,7 +100,7 @@ const Profile = () => {
              </div>
             </div>
 
-            <div className="flex justify-center items-center text-[#677D6A]">
+            <div className="flex justify-center items-center text-gray-700">
             <AiOutlineProduct className="text-8xl ml-3"/>
              <div className="stat place-items-center">
                  <div className="stat-title">Products</div>
@@ -108,7 +108,7 @@ const Profile = () => {
              </div>
             </div>
 
-            <div className="flex justify-center items-center text-[#677D6A]">
+            <div className="flex justify-center items-center text-gray-700">
             <PiTruck className="text-8xl ml-3"/>
              <div className="stat place-items-center">
                  <div className="stat-title">Orders</div>
@@ -117,7 +117,7 @@ const Profile = () => {
             </div>
          </div> : 
          <div className="stats shadow flex justify-between">
-         <div className="flex justify-center items-center text-[#677D6A]">
+         <div className="flex justify-center items-center text-gray-700">
          <LuListOrdered className="text-8xl ml-3"/>
           <div className="stat place-items-center">
               <div className="stat-title">Orders</div>
@@ -125,7 +125,7 @@ const Profile = () => {
           </div>
          </div>
 
-         <div className="flex justify-center items-center text-[#677D6A]">
+         <div className="flex justify-center items-center text-gray-700">
          <PiPaypalLogoBold className="text-8xl ml-3"/>
           <div className="stat place-items-center">
               <div className="stat-title">Payments</div>
@@ -133,7 +133,7 @@ const Profile = () => {
           </div>
          </div>
 
-         <div className="flex justify-center items-center text-[#677D6A]">
+         <div className="flex justify-center items-center text-gray-700">
          <TbStars className="text-8xl ml-3"/>
           <div className="stat place-items-center">
               <div className="stat-title">Reviews</div>

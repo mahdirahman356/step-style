@@ -276,7 +276,7 @@ const ProductUpdate = () => {
                     </div>
 
 
-                    <button className="btn my-12 w-64 mb-5 rounded-md bg-[#677D6A] text-white">
+                    <button className="btn my-12 w-64 mb-5 rounded-md bg-[#1A2130] text-white">
                     {loading ? <span className="loading loading-spinner loading-md"></span>
                         : "Continue"}
                     </button>

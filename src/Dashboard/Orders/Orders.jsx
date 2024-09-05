@@ -58,7 +58,7 @@ const Orders = () => {
                         </svg>
                         <p className="text-lg font-semibold text-gray-500">You have not placed an order yet</p>
                         <Link to="/shop">
-                            <button className="mt-6 px-4 py-2 bg-[#677D6A] text-white rounded">
+                            <button className="mt-6 px-4 py-2 bg-[#1A2130] text-white rounded">
                                 Start Shopping
                             </button>
                         </Link>

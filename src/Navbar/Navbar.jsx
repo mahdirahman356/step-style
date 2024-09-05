@@ -41,7 +41,7 @@ const Navbar = () => {
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
             <NavLink>{user &&
               <div className={`flex flex-col ${isAdmin && "hidden"}`}>
-                  <span className="indicator-item bg-[#677D6A]  text-white border-none badge badge-secondary">{order.length}+</span>
+                  <span className="indicator-item bg-[#1A2130]  text-white border-none badge badge-secondary">{order.length}+</span>
                 <PiShoppingCartLight className={`text-2xl `} />
               </div>}
             </NavLink>
@@ -61,7 +61,7 @@ const Navbar = () => {
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
             <NavLink>{user &&
               <div className={`flex flex-col ${isAdmin && "hidden"}`}>
-                  <span className="text-xs bg-[#677D6A] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
+                  <span className="text-xs bg-[#1A2130] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
                 <PiShoppingCartLight className={`text-2xl ${changeNavbarColor ? "text-black" : "text-white"}`} />
               </div>}
             </NavLink>

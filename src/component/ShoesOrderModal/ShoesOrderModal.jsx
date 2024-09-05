@@ -162,7 +162,7 @@ const ShoesOrderModal = ({ id }) => {
                     </select>
                 </div>
 
-                <button className="btn w-full rounded-3xl bg-[#677D6A] text-white">
+                <button className="btn w-full rounded-3xl bg-[#1A2130] text-white">
                     {loading ? <span className="loading loading-spinner loading-md"></span> : "order"}
                 </button>
             </form>

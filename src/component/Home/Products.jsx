@@ -19,7 +19,7 @@ const Products = () => {
 
     return (
         <div className="my-10 w-[95%] md:w-[80%] mx-auto md:my-28">
-            <h1 className="header-font text-[#677D6A] text-3xl md:text-5xl my-16 font-bold border-l-4 border-[#677D6A] pl-4">Products</h1>
+            <h1 className="header-font text-gray-600 text-3xl md:text-5xl my-16 font-bold border-l-4 border-gray-600 pl-4">Products</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 {
                     shoes.map((shoes, index) => <div key={index} className="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
@@ -53,7 +53,7 @@ const Products = () => {
 
                     <div className="w-56 -mt-10 overflow-hidden rounded-lg shadow-lg md:w-64 bg-white">
                         <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
-                        <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
+                        <div className="flex items-center justify-between px-3 py-2 bg-[#1A2130] text-white ">
                             <span className="font-bold">${shoes.price}</span>
 
                             {/* order modal  */}

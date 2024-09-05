@@ -63,18 +63,18 @@ const Shop = () => {
 
                     <form onSubmit={handleSearch} className="flex w-full">
                         <input type="text" name="search" placeholder="Search here" className="input rounded-sm input-bordered w-full" />
-                        <button className="btn bg-[#677D6A] text-white rounded-sm">
+                        <button className="btn bg-[#222b3e] text-white rounded-sm">
                             <MdSearch className="text-xl" />
                             Search
                         </button>
                     </form>
 
-                    <select value={sortOption} onChange={handleSortChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
+                    <select value={sortOption} onChange={handleSortChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#1A2130] text-white">
                         <option value="" disabled selected>Shot By Price </option>
                         <option value="priceLowHigh">Product Price: Low to High</option>
                         <option value="priceHighLow">Product Price: High to Low</option>
                     </select>
-                    <select value={selectedBrand} onChange={handleBrandChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#677D6A] text-white">
+                    <select value={selectedBrand} onChange={handleBrandChange} className="select rounded-sm select-bordered w-full max-w-xs bg-[#1A2130] text-white">
                         <option value="" disabled selected>All Brands</option>
                         {uniqueBrands.map((brand, index) =>
                             <option key={index} value={brand}>{brand}</option>
@@ -131,7 +131,7 @@ const Shop = () => {
 
                         <div className="w-56 -mt-10 overflow-hidden rounded-lg shadow-lg md:w-64 bg-white">
                             <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
-                            <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
+                            <div className="flex items-center justify-between px-3 py-2 bg-[#1A2130] text-white ">
                                 <span className="font-bold">${shoes.price}</span>
 
                                 {/* order modal  */}

@@ -84,7 +84,7 @@ const UpdateProfile = ({ id, location, contactNumber, image, refetch }) => {
         <div>
             <form onSubmit={handleUpdateProfile} className="w-full max-w-md text-gray-500">
                 <div className="flex items-center justify-center mt-6 mb-7">
-                    <a className="w-1/3 pb-4 font-medium text-center border-b-2 dark:border-[#677D6A]">
+                    <a className="w-1/3 pb-4 font-medium text-center border-b-2 dark:border-[#1A2130]">
                         Edit Profile
                     </a>
                 </div>
@@ -150,7 +150,7 @@ const UpdateProfile = ({ id, location, contactNumber, image, refetch }) => {
                 </div>
               <div className="md:w-[80%] mx-auto">
               <button
-                    className="btn text-white bg-[#677D6A] w-full my-6 rounded-sm"
+                    className="btn text-white bg-[#1A2130] w-full my-6 rounded-sm"
                     type="submit"
                 >
                     {loading ? <span className="loading loading-spinner text-white"></span> : "Continue"}

@@ -19,14 +19,14 @@ const Dashboard = () => {
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content flex ">
                         {/* Page content here */}
-                        <label htmlFor="my-drawer-2" className="btn bg-[#677D6A] border-none text-white rounded-r-3xl rounded-l-none drawer-button lg:hidden">
+                        <label htmlFor="my-drawer-2" className="btn bg-[#1A2130] border-none text-white rounded-r-3xl rounded-l-none drawer-button lg:hidden">
                             Open drawer
                             <FaChevronRight />
                         </label>
                     </div>
                     <div className="drawer-side z-20">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="menu bg-[#677D6A] text-white min-h-full w-72 p-12 fixed">
+                        <ul className="menu bg-[#1A2130] text-white min-h-full w-72 p-12 fixed">
                             {/* Sidebar content here */}
                             <NavLink className={({ isActive }) => isActive ? "text-black bg-white py-3 px-4 rounded-3xl flex items-center gap-2 mb-7" : "text-white flex items-center gap-2 mb-7"} to="profile"><LuUser2 className="text-xl" />Profile</NavLink>
                             {isAdmin

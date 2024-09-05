@@ -63,7 +63,7 @@ const NewProducts = () => {
         <div className="my-10 w-[95%] md:w-[80%] mx-auto md:my-28">
 
             <div className="slider-container w-[94%] md:w-full">
-            <h1 className="header-font text-[#677D6A] text-3xl md:text-5xl my-16 font-bold border-l-4 border-[#677D6A] pl-4">New Products</h1>
+            <h1 className="header-font text-gray-600 text-3xl md:text-5xl my-16 font-bold border-l-4 border-gray-600 pl-4">New Products</h1>
                       <p className="mr-4 mb-2 flex justify-end items-center gap-2 text-gray-600">See More <FaArrowRightLong /></p>
                 <Slider {...settings}>
                 {
@@ -98,7 +98,7 @@ const NewProducts = () => {
 
                     <div className="-mt-10 overflow-hidden rounded-b-lg shadow-lg  w-full bg-white">
                         <h3 className="py-2 font-bold tracking-wide text-center uppercase ">{shoes.name}</h3>
-                        <div className="flex items-center justify-between px-3 py-2 bg-[#677D6A] text-white ">
+                        <div className="flex items-center justify-between px-3 py-2 bg-[#1A2130] text-white ">
                             <span className="font-bold">${shoes.price}</span>
 
                             {/* order modal  */}
