@@ -50,7 +50,7 @@ const AllProduct = () => {
 
     return (
         <div className="w-[95%] mx-auto">
-            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">All Product</h2>
+            <h2 className="text-3xl font-bold pt-24 py-10 text-center text-gray-500">All Product</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
                 {

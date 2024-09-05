@@ -34,15 +34,15 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="btn btn-ghost p-0 pr-2 lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1]  p-6 shadow bg-base-100 rounded-box gap-3 w-52 text-gray-700">
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/shop'>Shop</NavLink>
             <NavLink to='/dashboard/profile'>Dashboard</NavLink>
             <NavLink>{user &&
               <div className={`flex flex-col ${isAdmin && "hidden"}`}>
-                  <span className="text-xs bg-[#677D6A] px-2 py-1 rounded-full -mb-3 ml-3 z-10 text-white">{order.length}+</span>
-                <PiShoppingCartLight className={`text-2xl ${changeNavbarColor ? "text-black" : "text-white"}`} />
+                  <span className="indicator-item bg-[#677D6A]  text-white border-none badge badge-secondary">{order.length}+</span>
+                <PiShoppingCartLight className={`text-2xl `} />
               </div>}
             </NavLink>
             </ul>

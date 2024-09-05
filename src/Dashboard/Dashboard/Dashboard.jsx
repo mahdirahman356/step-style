@@ -7,6 +7,7 @@ import { PiUsersThree } from "react-icons/pi";
 import { TbListDetails } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
+import { FaChevronRight } from "react-icons/fa";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin()
@@ -16,10 +17,11 @@ const Dashboard = () => {
             <div>
                 <div className="drawer lg:drawer-open fixed lg:relative lg:w-72 z-20">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                    <div className="drawer-content flex flex-col items-center justify-center">
+                    <div className="drawer-content flex ">
                         {/* Page content here */}
-                        <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
+                        <label htmlFor="my-drawer-2" className="btn bg-[#677D6A] border-none text-white rounded-r-3xl rounded-l-none drawer-button lg:hidden">
                             Open drawer
+                            <FaChevronRight />
                         </label>
                     </div>
                     <div className="drawer-side z-20">

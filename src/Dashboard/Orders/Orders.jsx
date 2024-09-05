@@ -49,7 +49,7 @@ const Orders = () => {
 
     return (
         <div className="w-[95%] mx-auto">
-            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">My Orders</h2>
+            <h2 className="text-3xl font-bold pt-24 py-10 text-center text-gray-500">My Orders</h2>
             {order.length === 0 ?
                 <div>
                     <div className="flex flex-col items-center justify-center mt-16">

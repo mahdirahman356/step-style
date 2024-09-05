@@ -158,7 +158,7 @@ const AddProduct = () => {
 
     return (
         <div className="w-[80%] mx-auto">
-            <h2 className="text-3xl font-bold mt-24 my-10 text-center text-gray-500">Add Product</h2>
+            <h2 className="text-3xl font-bold pt-24 py-10 text-center text-gray-500">Add Product</h2>
             <form onSubmit={handleAddProduct}>
                 <div className="flex flex-col-reverse md:flex-row justify-between mb-6 mt-20 gap-24">
 

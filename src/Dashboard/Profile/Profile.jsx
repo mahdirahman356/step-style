@@ -42,8 +42,7 @@ const Profile = () => {
 
 
     return (
-        <div className="w-[95%] mx-auto my-12 md:my-28 nunito">
-
+        <div className="w-[95%] mx-auto py-12 lg:py-0 lg:my-28 nunito">
             < div className="flex">
                 {
                     TheUser.map((TheUser, index) => <div key={index} className="p-8 sm:flex sm:space-x-6">
